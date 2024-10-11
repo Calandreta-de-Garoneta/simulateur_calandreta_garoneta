@@ -1,11 +1,4 @@
-# Simulateur de Frais de Scolarité / Jours de Présence au CLAE
+# Simulateur de Frais de Scolarité / Jours de Présence au CLAE de la calendreta de Garoneta
 
+Attention, ce simulateur donne un ordre d'idée du montant des frais de scolarité. Il n'engage pas l'école et n'est pas opposable.  
 
-
-echo "# simulateur_calendreta_garoneta" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/fsemecurbe/simulateur_calendreta_garoneta.git
-git push -u origin main
