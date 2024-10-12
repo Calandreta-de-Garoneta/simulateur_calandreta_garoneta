@@ -23,9 +23,6 @@ const tranches = FileAttachment("/data/tranche_revenu.json").json()
   </div>  
   <div class="card">
   <h3> Veuillez sélectionner les périodes de CLAE : </h3>
-
-
-
   ${clae}
   </div>
 </div>
@@ -44,24 +41,23 @@ const formulaire_values = Generators.input(formulaire);
 
 ```js
 const clae = (Inputs.form({
-  lundi: Inputs.checkbox(["matin", "midi", "soir"], {label: "lundi"}),
-  mardi: Inputs.checkbox(["matin", "midi", "soir"], {label: "mardi"}),
-  mercredi: Inputs.checkbox(["matin", "midi", "soir"], {label: "mercredi"}),
-  jeudi: Inputs.checkbox(["matin", "midi", "soir"], {label: "jeudi"}),
-  vendredi: Inputs.checkbox(["matin", "midi", "soir"], {label: "vendredi"})
+  lundi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "lundi"}),
+  mardi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "mardi"}),
+  mercredi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "mercredi"}),
+  jeudi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "jeudi"}),
+  vendredi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "vendredi"})
 }));
 const clae_values = Generators.input(clae);
 ```
-
-
 
 ```js
 // je calcule le revenu mensuel de reference et la tranche de revenu
 const revenu_mensuel = Math.floor(formulaire_values['revenu_annuel'] / 12)   
 const tranche_revenu =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]
+const situation_nb_enfants = ['A', 'B', 'C'][Math.min(formulaire_values['enfants'], 3)-1] 
 ```
 
-Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']} et ${tranche_revenu['max']}).  
+Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']} et ${tranche_revenu['max']}). Eu égard à votre nombre d'enfants, vos tarifs de clae seront ${tranche_revenu['tranche']}${situation_nb_enfants}.  
 
 
 Vos Frais de scolarité annuels sont estimés ainsi : 
