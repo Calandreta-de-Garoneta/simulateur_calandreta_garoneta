@@ -25,7 +25,7 @@ const informations_famille = view(Inputs.form({
 ```js
 // je calcule le revenu mensuel de reference et la tranche de revenu
 const revenu_mensuel = Math.floor(informations_famille['revenu_annuel'] / 12)   
-const tranches = FileAttachment("tranche_revenu").csv()
+const tranches = FileAttachment("./data/tranche_revenu.csv").csv()
 ```
 Vos revenus mensuels sont de ${revenu_mensuel} €.  
 
