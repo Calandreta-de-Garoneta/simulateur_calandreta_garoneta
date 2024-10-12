@@ -7,7 +7,6 @@ toc: false
 const tranches = FileAttachment("/data/tranche_revenu.json").json()
 ```
 
-
 <div class="grid grid-cols-2">
   <div>
     <img src="/Garoneta_logo3C.png"> 
@@ -18,23 +17,49 @@ const tranches = FileAttachment("/data/tranche_revenu.json").json()
   </div>
 </div>
 
+<div class="grid grid-cols-2">
+  <div class="card">
+  ${formulaire}
+  </div>  
+  <div class="card">
+  <h3> Veuillez sélectionner les périodes de CLAE : </h3>
+
+
+
+  ${clae}
+  </div>
+</div>
+
+
 ```js
-const informations_famille = view(Inputs.form({
+const formulaire = (Inputs.form({
   inscrits: Inputs.range([0, 8], {step: 1, label: "Nombre d'inscrit(s) en calandrette"}),
   enfants: Inputs.range([1, 8], {step: 1, label: "Nombre d'enfant(s) de la famille"}),
   revenu_annuel: Inputs.range([0, 120000], {step: 1000, label: "revenu fiscal de référence annuel des parents ou représentant légaux"}),
   residant_toulouse: Inputs.radio(["Oui", "Non"], {label: "Résidant à Toulouse", value: null, format: (x) => x ?? "Abstain"}),
-  famille_monoparentale: Inputs.radio(["Oui", "Non"], {label: "Famille monoparentale", value: null, format: (x) => x ?? "Abstain"})
+  famille_monoparentale: Inputs.radio(["Oui", "Non"], {label: "Famille monoparentale", value: null, format: (x) => x ?? "Abstain"}, 'toto')
 }));
+const formulaire_values = Generators.input(formulaire);
 ```
 
 ```js
-// je calcule le revenu mensuel de reference et la tranche de revenu
-const revenu_mensuel = Math.floor(informations_famille['revenu_annuel'] / 12)   
-const tranche_revenu =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]
+const clae = (Inputs.form({
+  lundi: Inputs.checkbox(["matin", "midi", "soir"], {label: "lundi"}),
+  mardi: Inputs.checkbox(["matin", "midi", "soir"], {label: "mardi"}),
+  mercredi: Inputs.checkbox(["matin", "midi", "soir"], {label: "mercredi"}),
+  jeudi: Inputs.checkbox(["matin", "midi", "soir"], {label: "jeudi"}),
+  vendredi: Inputs.checkbox(["matin", "midi", "soir"], {label: "vendredi"})
+}));
+const clae_values = Generators.input(clae);
 ```
 
 
+
+```js
+// je calcule le revenu mensuel de reference et la tranche de revenu
+const revenu_mensuel = Math.floor(formulaire_values['revenu_annuel'] / 12)   
+const tranche_revenu =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]
+```
 
 Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']} et ${tranche_revenu['max']}).  
 
