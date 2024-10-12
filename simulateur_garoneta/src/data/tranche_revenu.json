@@ -1,0 +1,57 @@
+[
+  {
+    "tranche": 1,
+    "min": 0,
+    "max": 1000
+  },
+  {
+    "tranche": 2,
+    "min": 1000,
+    "max": 1300
+  },
+  {
+    "tranche": 3,
+    "min": 1300,
+    "max": 1600
+  },
+  {
+    "tranche": 4,
+    "min": 1600,
+    "max": 2000
+  },
+  {
+    "tranche": 5,
+    "min": 2000,
+    "max": 2400
+  },
+  {
+    "tranche": 6,
+    "min": 2400,
+    "max": 2800
+  },
+  {
+    "tranche": 7,
+    "min": 2800,
+    "max": 3200
+  },
+  {
+    "tranche": 8,
+    "min": 3200,
+    "max": 4500
+  },
+  {
+    "tranche": 9,
+    "min": 4500,
+    "max": 6000
+  },
+  {
+    "tranche": 10,
+    "min": 6000,
+    "max": 8000
+  },
+  {
+    "tranche": 11,
+    "min": 8000,
+    "max": 100000
+  }
+]

@@ -4,7 +4,7 @@ toc: false
 
 ```js
 // je charge les tranches de revenus
-const tranches = FileAttachment("/data/tranche_revenu.csv").csv({typed: true})
+const tranches = FileAttachment("/data/tranche_revenu.json").json()
 ```
 
 
@@ -33,6 +33,8 @@ const informations_famille = view(Inputs.form({
 const revenu_mensuel = Math.floor(informations_famille['revenu_annuel'] / 12)   
 const tranche_revenu =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]
 ```
+
+
 
 Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']} et ${tranche_revenu['max']}).  
 
