@@ -5,6 +5,7 @@ toc: false
 ```js
 // je charge les tranches de revenus
 const tranches = FileAttachment("/data/tranche_revenu.json").json()
+const tarifs_forfait = FileAttachment("/data/tarifs_forfait.json").json()
 ```
 
 <div class="grid grid-cols-2">
@@ -54,10 +55,20 @@ const clae_values = Generators.input(clae);
 // je calcule le revenu mensuel de reference et la tranche de revenu
 const revenu_mensuel = Math.floor(formulaire_values['revenu_annuel'] / 12)   
 const tranche_revenu =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]
-const situation_nb_enfants = ['A', 'B', 'C'][Math.min(formulaire_values['enfants'], 3)-1] 
+const lettre = ['A', 'B', 'C'][Math.min(formulaire_values['enfants'], 3)-1] 
+const prix_repas_cantine =  tarifs_forfait.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['Repas cantine']
 ```
 
-Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']} et ${tranche_revenu['max']}). Eu égard à votre nombre d'enfants, vos tarifs de clae seront ${tranche_revenu['tranche']}${situation_nb_enfants}.  
+Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']}€ et ${tranche_revenu['max']}€). Eu égard à votre nombre d'enfants, vos tarifs de clae seront ${tranche_revenu['tranche']}${lettre}. Le prix d'un repas est ${prix_repas_cantine}€. 
+
+```js
+const jour_dejeuner = clae_values['lundi'].includes('déjeuner') + clae_values['mardi'].includes('déjeuner') + 
+                      clae_values['mercredi'].includes('déjeuner') + clae_values['jeudi'].includes('déjeuner') + 
+                      clae_values['vendredi'].includes('déjeuner')
+```
 
 
 Vos Frais de scolarité annuels sont estimés ainsi : 
+
+
+Frais Annuel de cantine : ${36*jour_dejeuner*prix_repas_cantine}

@@ -1,0 +1,266 @@
+[
+  {
+    "tranche": 1,
+    "lettre": "A",
+    "clae matin": 0.135,
+    "clae midi": 0.345,
+    "clae soir": 0.345,
+    "Repas cantine": 1.155
+  },
+  {
+    "tranche": 1,
+    "lettre": "B",
+    "clae matin": 0.135,
+    "clae midi": 0.345,
+    "clae soir": 0.345,
+    "Repas cantine": 1.155
+  },
+  {
+    "tranche": 1,
+    "lettre": "C",
+    "clae matin": 0.135,
+    "clae midi": 0.345,
+    "clae soir": 0.345,
+    "Repas cantine": 1.155
+  },
+  {
+    "tranche": 2,
+    "lettre": "A",
+    "clae matin": 0.27,
+    "clae midi": 0.705,
+    "clae soir": 0.705,
+    "Repas cantine": 1.68
+  },
+  {
+    "tranche": 2,
+    "lettre": "B",
+    "clae matin": 0.255,
+    "clae midi": 0.66,
+    "clae soir": 0.66,
+    "Repas cantine": 1.68
+  },
+  {
+    "tranche": 2,
+    "lettre": "C",
+    "clae matin": 0.24,
+    "clae midi": 0.6,
+    "clae soir": 0.6,
+    "Repas cantine": 1.68
+  },
+  {
+    "tranche": 3,
+    "lettre": "A",
+    "clae matin": 0.33,
+    "clae midi": 0.84,
+    "clae soir": 0.84,
+    "Repas cantine": 2.415
+  },
+  {
+    "tranche": 3,
+    "lettre": "B",
+    "clae matin": 0.315,
+    "clae midi": 0.81,
+    "clae soir": 0.81,
+    "Repas cantine": 2.415
+  },
+  {
+    "tranche": 3,
+    "lettre": "C",
+    "clae matin": 0.285,
+    "clae midi": 0.735,
+    "clae soir": 0.735,
+    "Repas cantine": 2.415
+  },
+  {
+    "tranche": 4,
+    "lettre": "A",
+    "clae matin": 0.42,
+    "clae midi": 1.05,
+    "clae soir": 1.05,
+    "Repas cantine": 3.045
+  },
+  {
+    "tranche": 4,
+    "lettre": "B",
+    "clae matin": 0.405,
+    "clae midi": 1.02,
+    "clae soir": 1.02,
+    "Repas cantine": 3.045
+  },
+  {
+    "tranche": 4,
+    "lettre": "C",
+    "clae matin": 0.375,
+    "clae midi": 0.945,
+    "clae soir": 0.945,
+    "Repas cantine": 3.045
+  },
+  {
+    "tranche": 5,
+    "lettre": "A",
+    "clae matin": 0.42,
+    "clae midi": 1.05,
+    "clae soir": 1.05,
+    "Repas cantine": 3.465
+  },
+  {
+    "tranche": 5,
+    "lettre": "B",
+    "clae matin": 0.405,
+    "clae midi": 1.02,
+    "clae soir": 1.02,
+    "Repas cantine": 3.465
+  },
+  {
+    "tranche": 5,
+    "lettre": "C",
+    "clae matin": 0.375,
+    "clae midi": 0.945,
+    "clae soir": 0.945,
+    "Repas cantine": 3.465
+  },
+  {
+    "tranche": 6,
+    "lettre": "A",
+    "clae matin": 0.42,
+    "clae midi": 1.05,
+    "clae soir": 1.05,
+    "Repas cantine": 3.78
+  },
+  {
+    "tranche": 6,
+    "lettre": "B",
+    "clae matin": 0.405,
+    "clae midi": 1.02,
+    "clae soir": 1.02,
+    "Repas cantine": 3.78
+  },
+  {
+    "tranche": 6,
+    "lettre": "C",
+    "clae matin": 0.375,
+    "clae midi": 0.945,
+    "clae soir": 0.945,
+    "Repas cantine": 3.78
+  },
+  {
+    "tranche": 7,
+    "lettre": "A",
+    "clae matin": 0.42,
+    "clae midi": 1.05,
+    "clae soir": 1.05,
+    "Repas cantine": 4.095
+  },
+  {
+    "tranche": 7,
+    "lettre": "B",
+    "clae matin": 0.405,
+    "clae midi": 1.02,
+    "clae soir": 1.02,
+    "Repas cantine": 4.095
+  },
+  {
+    "tranche": 7,
+    "lettre": "C",
+    "clae matin": 0.375,
+    "clae midi": 0.945,
+    "clae soir": 0.945,
+    "Repas cantine": 4.095
+  },
+  {
+    "tranche": 8,
+    "lettre": "A",
+    "clae matin": 0.555,
+    "clae midi": 1.41,
+    "clae soir": 1.41,
+    "Repas cantine": 4.515
+  },
+  {
+    "tranche": 8,
+    "lettre": "B",
+    "clae matin": 0.54,
+    "clae midi": 1.38,
+    "clae soir": 1.38,
+    "Repas cantine": 4.515
+  },
+  {
+    "tranche": 8,
+    "lettre": "C",
+    "clae matin": 0.525,
+    "clae midi": 1.305,
+    "clae soir": 1.305,
+    "Repas cantine": 4.515
+  },
+  {
+    "tranche": 9,
+    "lettre": "A",
+    "clae matin": 0.84,
+    "clae midi": 2.115,
+    "clae soir": 2.115,
+    "Repas cantine": 5.04
+  },
+  {
+    "tranche": 9,
+    "lettre": "B",
+    "clae matin": 0.825,
+    "clae midi": 2.085,
+    "clae soir": 2.085,
+    "Repas cantine": 5.04
+  },
+  {
+    "tranche": 9,
+    "lettre": "C",
+    "clae matin": 0.795,
+    "clae midi": 2.01,
+    "clae soir": 2.01,
+    "Repas cantine": 5.04
+  },
+  {
+    "tranche": 10,
+    "lettre": "A",
+    "clae matin": 0.99,
+    "clae midi": 2.475,
+    "clae soir": 2.475,
+    "Repas cantine": 5.46
+  },
+  {
+    "tranche": 10,
+    "lettre": "B",
+    "clae matin": 0.975,
+    "clae midi": 2.445,
+    "clae soir": 2.445,
+    "Repas cantine": 5.46
+  },
+  {
+    "tranche": 10,
+    "lettre": "C",
+    "clae matin": 0.945,
+    "clae midi": 2.37,
+    "clae soir": 2.37,
+    "Repas cantine": 5.46
+  },
+  {
+    "tranche": 11,
+    "lettre": "A",
+    "clae matin": 1.125,
+    "clae midi": 2.835,
+    "clae soir": 2.835,
+    "Repas cantine": 5.985
+  },
+  {
+    "tranche": 11,
+    "lettre": "B",
+    "clae matin": 1.11,
+    "clae midi": 2.79,
+    "clae soir": 2.79,
+    "Repas cantine": 5.985
+  },
+  {
+    "tranche": 11,
+    "lettre": "C",
+    "clae matin": 1.08,
+    "clae midi": 2.73,
+    "clae soir": 2.73,
+    "Repas cantine": 5.985
+  }
+]
