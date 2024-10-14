@@ -8,6 +8,10 @@ const tranches = FileAttachment("/data/tranche_revenu.json").json()
 const tarifs_forfait = FileAttachment("/data/tarifs_forfait.json").json()
 ```
 
+
+
+
+
 <div class="grid grid-cols-2">
   <div>
     <img src="/Garoneta_logo3C.png"> 
@@ -18,14 +22,86 @@ const tarifs_forfait = FileAttachment("/data/tarifs_forfait.json").json()
   </div>
 </div>
 
+<div class="caution", label="Attention">La simulation est réalisée en local dans votre navigateur. Aucune information n'est communiquée à l'école.</div>
+
+
+
+
 <div class="grid grid-cols-2">
   <div class="card">
+  <h3> Informations familiales : </h3>
   ${formulaire}
   </div>  
   <div class="card">
-  <h3> Veuillez sélectionner les périodes de CLAE : </h3>
+  <h3> Périodes de CLAE envisagées : </h3>
   ${clae}
+  <br></br>
+  <h4>Le déjeuner comprend la CLAE ainsi que la cantine.</h4>
   </div>
+<div class="card">
+  <h3> Vos Frais de scolarité annuels sont estimés ainsi :  </h3>
+
+<table>
+  <tr>
+    <td></td>
+    <td>Calcul</td>
+    <td>Total</td>
+  </tr>
+  <tr>
+    <td>Adhésion Asso Garoneta</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Adhésion Asso Cor D'oc</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>Participation  gestion CLAE/Frais scolarité</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Cotisation Fédération Régionale + Départementale</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Cotisation Confédération</td>
+    <td></td>
+    <td></td>
+    </tr>
+  <tr>
+    <td>Forfait Papier</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Provision Classe Verte</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Cantine</td>
+    <td></td>
+    <td>${Math.round(36*jour_dejeuner*prix_repas_cantine * 100) / 100}</td>
+  </tr>
+  <tr>
+    <td>CLAE / CLSH</td>
+    <td></td>
+    <td></td>
+  </tr>
+
+</table>
+</div>
+<div class="card">
+<h3>A reporter sur l'attestation :</h3>
+</div class="card">
+
+<div class="card">
+Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']}€ et ${tranche_revenu['max']}€). Eu égard à votre nombre d'enfants, vos tarifs de clae seront ${tranche_revenu['tranche']}${lettre}. Le prix d'un repas est ${prix_repas_cantine}€. 
+</div>
+
 </div>
 
 
@@ -59,7 +135,7 @@ const lettre = ['A', 'B', 'C'][Math.min(formulaire_values['enfants'], 3)-1]
 const prix_repas_cantine =  tarifs_forfait.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['Repas cantine']
 ```
 
-Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']}€ et ${tranche_revenu['max']}€). Eu égard à votre nombre d'enfants, vos tarifs de clae seront ${tranche_revenu['tranche']}${lettre}. Le prix d'un repas est ${prix_repas_cantine}€. 
+
 
 ```js
 const jour_dejeuner = clae_values['lundi'].includes('déjeuner') + clae_values['mardi'].includes('déjeuner') + 
@@ -68,7 +144,5 @@ const jour_dejeuner = clae_values['lundi'].includes('déjeuner') + clae_values['
 ```
 
 
-Vos Frais de scolarité annuels sont estimés ainsi : 
 
 
-Frais Annuel de cantine : ${36*jour_dejeuner*prix_repas_cantine}
