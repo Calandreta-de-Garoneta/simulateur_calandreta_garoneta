@@ -5,9 +5,12 @@ toc: false
 ```js
 // je charge les tranches de revenus
 const tranches = FileAttachment("/data/tranche_revenu.json").json()
-const tarifs_forfait = FileAttachment("/data/tarifs_forfait.json").json()
-```
+const tarifs_actes = FileAttachment("/data/tarifs_actes.json").json()
+const semaines = 36 
+const lmjv = ['lundi', 'mardi', 'jeudi', 'vendredi']
+const lmmjv = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
 
+```
 
 
 
@@ -29,17 +32,59 @@ const tarifs_forfait = FileAttachment("/data/tarifs_forfait.json").json()
 
 <div class="grid grid-cols-2">
   <div class="card">
-  <h3> Informations familiales : </h3>
-  ${formulaire}
+    <h3> Informations familiales : </h3>
+    ${formulaire}
   </div>  
   <div class="card">
-  <h3> Périodes de CLAE envisagées : </h3>
-  ${clae}
-  <br></br>
-  <h4>Le déjeuner comprend la CLAE ainsi que la cantine.</h4>
+    <h3> Périodes de CLAE envisagées : </h3>
+    ${clae}
+    <br></br>
+    <h4>Le déjeuner comprend la CLAE ainsi que la cantine.</h4>
   </div>
+
+  <div class="card">
+    <h3>Barême de tarification CLAE et Cantine</h3>
+
+  Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']}€ et ${tranche_revenu['max']}€). Eu égard à votre nombre d'enfants, vos tarifs de CLAE et cantine seront ${tranche_revenu['tranche']}${lettre}.
+
+<table>
+  <tr>
+    <td></td>
+    <td>Coût unitaire</td>
+    <td>Coût total</td>
+  </tr>
+  <tr>
+    <td>CLAE matin</td>
+    <td>${cout_clae_matin} €</td>
+    <td>${cout_clae_matin*nb_clae_matin*semaines} €</td>
+  </tr>
+  <tr>
+    <td>CLAE midi</td>
+    <td>${cout_clae_midi} €</td>
+    <td>${cout_clae_midi*nb_clae_midi*semaines} €</td>
+  </tr>
+  <tr>
+    <td>CLAE soir</td>
+    <td>${cout_clae_soir} €</td>
+    <td>${cout_clae_soir*nb_clae_soir*semaines} €</td>
+  </tr>
+  <tr>
+    <td>Cantine</td>
+    <td>${prix_repas_cantine}</td>
+    <td>${prix_repas_cantine*nb_jours_cantine*semaines} €</td>
+  </tr>  
+</table>
+
+
+
+  </div>
+
+
 <div class="card">
   <h3> Vos Frais de scolarité annuels sont estimés ainsi :  </h3>
+
+
+
 
 <table>
   <tr>
@@ -84,7 +129,7 @@ const tarifs_forfait = FileAttachment("/data/tarifs_forfait.json").json()
   <tr>
     <td>Cantine</td>
     <td></td>
-    <td>${Math.round(36*jour_dejeuner*prix_repas_cantine * 100) / 100}</td>
+    <td>${Math.round(prix_repas_cantine*nb_jours_cantine*semaines * 100) / 100}</td>
   </tr>
   <tr>
     <td>CLAE / CLSH</td>
@@ -99,7 +144,7 @@ const tarifs_forfait = FileAttachment("/data/tarifs_forfait.json").json()
 </div class="card">
 
 <div class="card">
-Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']}€ et ${tranche_revenu['max']}€). Eu égard à votre nombre d'enfants, vos tarifs de clae seront ${tranche_revenu['tranche']}${lettre}. Le prix d'un repas est ${prix_repas_cantine}€. 
+ 
 </div>
 
 </div>
@@ -132,17 +177,33 @@ const clae_values = Generators.input(clae);
 const revenu_mensuel = Math.floor(formulaire_values['revenu_annuel'] / 12)   
 const tranche_revenu =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]
 const lettre = ['A', 'B', 'C'][Math.min(formulaire_values['enfants'], 3)-1] 
-const prix_repas_cantine =  tarifs_forfait.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['Repas cantine']
+const prix_repas_cantine =  tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['Repas cantine']
+
 ```
 
 
 
 ```js
-const jour_dejeuner = clae_values['lundi'].includes('déjeuner') + clae_values['mardi'].includes('déjeuner') + 
-                      clae_values['mercredi'].includes('déjeuner') + clae_values['jeudi'].includes('déjeuner') + 
-                      clae_values['vendredi'].includes('déjeuner')
+const nb_jours_cantine = (lmmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
+accumulator + current);
+
+const nb_clae_matin =  (lmjv.map(d=>clae_values[d].includes('matin'))).reduce((accumulator, current) => 
+accumulator + current);
+const cout_clae_matin = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ matin']
+
+const nb_clae_soir =  (lmjv.map(d=>clae_values[d].includes('soir'))).reduce((accumulator, current) => 
+accumulator + current);
+const cout_clae_soir = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ soir']
+
+const nb_clae_midi =  (lmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
+accumulator + current);
+const cout_clae_midi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ midi']
+
+const statut_mercredi = clae_values['mercredi'].length
+
+
 ```
 
 
 
-
+ 
