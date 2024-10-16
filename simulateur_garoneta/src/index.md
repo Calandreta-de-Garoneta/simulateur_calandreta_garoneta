@@ -9,6 +9,10 @@ const tarifs_actes = FileAttachment("/data/tarifs_actes.json").json()
 const semaines = 36 
 const lmjv = ['lundi', 'mardi', 'jeudi', 'vendredi']
 const lmmjv = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
+const cout_unitaire_asso_garoneta = 10
+const cout_unitaire_cor_doc = 2
+const cotisation_federation_regionale = 10
+const cotisation_federation_departementale = 3
 
 ```
 
@@ -56,18 +60,24 @@ const lmmjv = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
   <tr>
     <td>CLAE matin</td>
     <td>${cout_clae_matin} €</td>
-    <td>${cout_clae_matin*nb_clae_matin*semaines} €</td>
+    <td>${Math.round(cout_clae_matin*nb_clae_matin*semaines*100)/100} €</td>
   </tr>
   <tr>
     <td>CLAE midi</td>
     <td>${cout_clae_midi} €</td>
-    <td>${cout_clae_midi*nb_clae_midi*semaines} €</td>
+    <td>${Math.round(cout_clae_midi*nb_clae_midi*semaines*100)/100} €</td>
   </tr>
   <tr>
     <td>CLAE soir</td>
     <td>${cout_clae_soir} €</td>
-    <td>${cout_clae_soir*nb_clae_soir*semaines} €</td>
+    <td>${Math.round(cout_clae_soir*nb_clae_soir*semaines*100)/100} €</td>
   </tr>
+  <tr>
+    <td>CLSH (mercredi)</td>
+    <td>A faire €</td>
+    <td>A faire €</td>
+  </tr>
+
   <tr>
     <td>Cantine</td>
     <td>${prix_repas_cantine}</td>
@@ -89,51 +99,42 @@ const lmmjv = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
 <table>
   <tr>
     <td></td>
-    <td>Calcul</td>
-    <td>Total</td>
+    <td>Coût Total</td>
   </tr>
   <tr>
     <td>Adhésion Asso Garoneta</td>
-    <td></td>
+    <td>${cout_asso_garoneta} €</td>
   </tr>
   <tr>
     <td>Adhésion Asso Cor D'oc</td>
-    <td></td>
+    <td>${cout_asso_cor_dor} €</td>
   </tr>
-
   <tr>
     <td>Participation  gestion CLAE/Frais scolarité</td>
     <td></td>
-    <td></td>
   </tr>
   <tr>
-    <td>Cotisation Fédération Régionale + Départementale</td>
-    <td></td>
-    <td></td>
+    <td>Cotisation Fédération Régionale et Départementale</td>
+    <td>${cout_cotisation_federation_regionale_et_departementale} €</td>
   </tr>
   <tr>
     <td>Cotisation Confédération</td>
     <td></td>
-    <td></td>
     </tr>
   <tr>
     <td>Forfait Papier</td>
-    <td></td>
-    <td></td>
+    <td></td> 
   </tr>
   <tr>
     <td>Provision Classe Verte</td>
     <td></td>
-    <td></td>
   </tr>
   <tr>
     <td>Cantine</td>
-    <td></td>
     <td>${Math.round(prix_repas_cantine*nb_jours_cantine*semaines * 100) / 100}</td>
   </tr>
   <tr>
-    <td>CLAE / CLSH</td>
-    <td></td>
+    <td>CLAE / CLSH</td>  
     <td></td>
   </tr>
 
@@ -201,9 +202,11 @@ const cout_clae_midi = tarifs_actes.filter(function(v) {return (v.tranche ==tran
 
 const statut_mercredi = clae_values['mercredi'].length
 
-
+const cout_asso_garoneta = (2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_asso_garoneta
+const cout_asso_cor_dor = (2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_cor_doc
+const cout_cotisation_federation_regionale_et_departementale = formulaire_values['inscrits']*(cotisation_federation_departementale + cotisation_federation_regionale)
 ```
 
-
-
- 
+```js
+cout_unitaire_cor_doc
+```
