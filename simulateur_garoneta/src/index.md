@@ -6,6 +6,7 @@ toc: false
 // je charge les tranches de revenus
 const tranches = FileAttachment("/data/tranche_revenu.json").json()
 const tarifs_actes = FileAttachment("/data/tarifs_actes.json").json()
+const forfait_scolarite = FileAttachment("/data/forfait_scolarite.json").json()
 const semaines = 36 
 const lmjv = ['lundi', 'mardi', 'jeudi', 'vendredi']
 const lmmjv = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
@@ -13,7 +14,10 @@ const cout_unitaire_asso_garoneta = 10
 const cout_unitaire_cor_doc = 2
 const cotisation_federation_regionale = 10
 const cotisation_federation_departementale = 3
-
+const cotisation_Conferation_trimestrielle = 14 
+const forfait_papier = 6
+const classe_verte_maternelle = 80
+const classe_verte_primaire = 140
 ```
 
 
@@ -111,7 +115,7 @@ const cotisation_federation_departementale = 3
   </tr>
   <tr>
     <td>Participation  gestion CLAE/Frais scolarité</td>
-    <td></td>
+    <td>${cout_forfait_scolarite} €</td>
   </tr>
   <tr>
     <td>Cotisation Fédération Régionale et Départementale</td>
@@ -119,15 +123,15 @@ const cotisation_federation_departementale = 3
   </tr>
   <tr>
     <td>Cotisation Confédération</td>
-    <td></td>
+    <td>${cout_cotisation_Conferation_trimestrielle} €</td>
     </tr>
   <tr>
     <td>Forfait Papier</td>
-    <td></td> 
+    <td>${cout_forfait_papier} €</td> 
   </tr>
   <tr>
     <td>Provision Classe Verte</td>
-    <td></td>
+    <td>${cout_classe_verte} €</td>
   </tr>
   <tr>
     <td>Cantine</td>
@@ -135,6 +139,10 @@ const cotisation_federation_departementale = 3
   </tr>
   <tr>
     <td>CLAE / CLSH</td>  
+    <td>bug ${cout_total_clae} €</td>
+  </tr>
+  <tr>
+    <td><b>Total</b></td>  
     <td></td>
   </tr>
 
@@ -153,7 +161,8 @@ const cotisation_federation_departementale = 3
 
 ```js
 const formulaire = (Inputs.form({
-  inscrits: Inputs.range([0, 8], {step: 1, label: "Nombre d'inscrit(s) en calandrette"}),
+  inscrits_primaire: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en primaire calandrette"}),
+  inscrits_maternelle: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en maternelle calendrette"}),
   enfants: Inputs.range([1, 8], {step: 1, label: "Nombre d'enfant(s) de la famille"}),
   revenu_annuel: Inputs.range([0, 120000], {step: 1000, label: "revenu fiscal de référence annuel des parents ou représentant légaux"}),
   residant_toulouse: Inputs.radio(["Oui", "Non"], {label: "Résidant à Toulouse", value: null, format: (x) => x ?? "Abstain"}),
@@ -179,12 +188,12 @@ const revenu_mensuel = Math.floor(formulaire_values['revenu_annuel'] / 12)
 const tranche_revenu =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]
 const lettre = ['A', 'B', 'C'][Math.min(formulaire_values['enfants'], 3)-1] 
 const prix_repas_cantine =  tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['Repas cantine']
-
 ```
 
 
 
 ```js
+const inscrits = formulaire_values['inscrits_primaire'] + formulaire_values['inscrits_maternelle']
 const nb_jours_cantine = (lmmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
 accumulator + current);
 
@@ -199,14 +208,23 @@ const cout_clae_soir = tarifs_actes.filter(function(v) {return (v.tranche ==tran
 const nb_clae_midi =  (lmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
 accumulator + current);
 const cout_clae_midi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ midi']
-
 const statut_mercredi = clae_values['mercredi'].length
+const cout_clae_mercredi = 0
+const cout_total_clae = cout_clae_matin + nb_clae_soir + cout_clae_midi + cout_clae_mercredi
 
-const cout_asso_garoneta = (2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_asso_garoneta
+
+const cout_asso_garoneta = Math.round((2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_asso_garoneta * 100) / 100
 const cout_asso_cor_dor = (2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_cor_doc
-const cout_cotisation_federation_regionale_et_departementale = formulaire_values['inscrits']*(cotisation_federation_departementale + cotisation_federation_regionale)
+const cout_cotisation_federation_regionale_et_departementale = inscrits*(cotisation_federation_departementale + cotisation_federation_regionale)
+const cout_cotisation_Conferation_trimestrielle = cotisation_Conferation_trimestrielle * 4 * inscrits
+const cout_forfait_papier = forfait_papier * inscrits 
+const cout_classe_verte = classe_verte_maternelle * formulaire_values['inscrits_maternelle'] + classe_verte_primaire * formulaire_values['inscrits_primaire']
+const cout_forfait_scolarite = forfait_scolarite.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0][inscrits] * 12
+
 ```
 
+
+
 ```js
-cout_unitaire_cor_doc
+cout_forfait_scolarite
 ```
