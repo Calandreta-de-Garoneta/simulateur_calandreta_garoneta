@@ -214,8 +214,6 @@ const lettre = ['A', 'B', 'C'][Math.min(formulaire_values['enfants'], 3)-1]
 const prix_repas_cantine =  tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['Repas cantine']
 ```
 
-
-
 ```js
 const inscrits = formulaire_values['inscrits_primaire'] + formulaire_values['inscrits_maternelle']
 const nb_jours_cantine = (lmmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
@@ -247,7 +245,6 @@ if (clae_values['mercredi'].includes('matin') && clae_values['mercredi'].include
 } else {prix_clae_mercredi = 0}
 const cout_clae_mercredi = Math.round(prix_clae_mercredi * semaines * 100) / 100
 
-
 const cout_total_clae = Math.round((cout_clae_matin + cout_clae_midi + cout_clae_soir + cout_clae_mercredi)*100)/100
 
 const cout_asso_garoneta = Math.round((2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_asso_garoneta * 100) / 100
@@ -258,19 +255,9 @@ const cout_forfait_papier = forfait_papier * inscrits
 const cout_classe_verte = classe_verte_maternelle * formulaire_values['inscrits_maternelle'] + classe_verte_primaire * formulaire_values['inscrits_primaire']
 const cout_forfait_scolarite = forfait_scolarite.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0][inscrits] * 12
 
-
 const cout_total = Math.round((cout_asso_garoneta+cout_asso_cor_dor+cout_cotisation_federation_regionale_et_departementale+cout_cotisation_Conferation_trimestrielle+cout_forfait_papier+cout_classe_verte+cout_forfait_scolarite+ cout_cantine + cout_total_clae)*100)/100
 
-const frais_de_scolarite =  Math.round((cout_asso_garoneta + cout_asso_cor_dor+ cout_cotisation_federation_regionale_et_departementale + cout_cotisation_Conferation_trimestrielle+ cout_forfait_papier + cout_classe_verte )*100)/100
+const frais_de_scolarite =  Math.round((cout_asso_garoneta + cout_asso_cor_dor+ cout_cotisation_federation_regionale_et_departementale + cout_cotisation_Conferation_trimestrielle+ cout_forfait_papier + cout_classe_verte + 20 *12)*100)/100
 
-const frais_de_garde = Math.round((cout_forfait_scolarite + cout_total_clae)*100)/100
-
-
+const frais_de_garde = Math.round((cout_forfait_scolarite + cout_total_clae- 20*12)*100)/100
 ```
-
-
-
-
-
-
-
