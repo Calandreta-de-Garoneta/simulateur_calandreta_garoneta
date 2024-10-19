@@ -30,8 +30,12 @@ const classe_verte_primaire = 140
   </div>
 </div>
 
-<div class="caution", label="Attention">La simulation est réalisée en local dans votre navigateur. Aucune information n'est communiquée à l'école.
-Le simulateur ne fonctionne pas si vous avez plus de 4 enfants à l'école. Vérifier que le nombre d'inscrits soit inférieur au nombre d'enfants.
+<div class="caution", label="Attention !">
+
+- Le simulateur a une vocation indicative et fournit une estimation approximative des frais. **Ces estimations ne sont pas opposables, et les frais réels seront confirmés lors de l'inscription définitive**.
+- La simulation est effectuée localement dans votre navigateur, **aucune information ne quitte votre navigateur**.
+- Le simulateur ne prend pas en charge les familles ayant plus de 4 enfants inscrits.
+- Assurez-vous que le nombre d'inscrits est bien inférieur ou égal au nombre d'enfants.
 </div>
 
 <div class="grid grid-cols-2">
@@ -172,7 +176,7 @@ Le simulateur ne fonctionne pas si vous avez plus de 4 enfants à l'école. Vér
 
   </table>
 
-  Soit 12 règlements mensuel de ${Math.round((cout_total/12)*100)/100}€.
+  <b> Soit 12 règlements mensuel de ${Math.round((cout_total/12)*100)/100}€.</b>
 
 </div class="card">
 
