@@ -20,9 +20,6 @@ const classe_verte_maternelle = 80
 const classe_verte_primaire = 140
 ```
 
-
-
-
 <div class="grid grid-cols-2">
   <div>
     <img src="/Garoneta_logo3C.png"> 
@@ -63,29 +60,29 @@ const classe_verte_primaire = 140
   </tr>
   <tr>
     <td>CLAE matin</td>
+    <td>${prix_clae_matin} €</td>
     <td>${cout_clae_matin} €</td>
-    <td>${Math.round(cout_clae_matin*nb_clae_matin*semaines*100)/100} €</td>
   </tr>
   <tr>
     <td>CLAE midi</td>
+    <td>${prix_clae_midi} €</td>
     <td>${cout_clae_midi} €</td>
-    <td>${Math.round(cout_clae_midi*nb_clae_midi*semaines*100)/100} €</td>
   </tr>
   <tr>
     <td>CLAE soir</td>
+    <td>${prix_clae_soir} €</td>
     <td>${cout_clae_soir} €</td>
-    <td>${Math.round(cout_clae_soir*nb_clae_soir*semaines*100)/100} €</td>
   </tr>
   <tr>
     <td>CLSH (mercredi)</td>
-    <td>A faire €</td>
-    <td>A faire €</td>
+    <td>${prix_clae_mercredi} €</td>
+    <td>${cout_clae_mercredi} €</td>
   </tr>
 
   <tr>
     <td>Cantine</td>
     <td>${prix_repas_cantine}</td>
-    <td>${prix_repas_cantine*nb_jours_cantine*semaines} €</td>
+    <td>${cout_cantine} €</td>
   </tr>  
 </table>
 
@@ -103,7 +100,7 @@ const classe_verte_primaire = 140
 <table>
   <tr>
     <td></td>
-    <td>Coût Total</td>
+    <td>Coût</td>
   </tr>
   <tr>
     <td>Adhésion Asso Garoneta</td>
@@ -135,21 +132,48 @@ const classe_verte_primaire = 140
   </tr>
   <tr>
     <td>Cantine</td>
-    <td>${Math.round(prix_repas_cantine*nb_jours_cantine*semaines * 100) / 100}</td>
+    <td>${cout_cantine}</td>
   </tr>
   <tr>
     <td>CLAE / CLSH</td>  
-    <td>bug ${cout_total_clae} €</td>
+    <td>${cout_total_clae} €</td>
   </tr>
   <tr>
     <td><b>Total</b></td>  
-    <td></td>
+    <td>${cout_total} €</td>
   </tr>
 
 </table>
 </div>
+
 <div class="card">
-<h3>A reporter sur l'attestation :</h3>
+  <h3>A reporter sur l'attestation :</h3>
+  <table>
+    <tr>
+     <td>Répartition des coûts</td>
+     <td>Coût</td>
+    </tr>
+    <tr>
+     <td>Frais de scolarité</td>
+     <td>${frais_de_scolarite} €</td>
+    </tr>
+    <tr>
+      <td>Frais de garde</td>
+      <td>${frais_de_garde} €</td>
+    </tr>
+    <tr>
+      <td>Frais de repas</td>
+      <td>${cout_cantine} €</td>
+    </tr>
+    <tr>
+      <td><b>Total </b></td>
+      <td>${cout_total} €</td>
+    </tr>
+
+
+  </table>
+
+Soit 12 règlements mensuel de ${Math.round((cout_total/12)*100)/100}€.
 </div class="card">
 
 <div class="card">
@@ -161,9 +185,9 @@ const classe_verte_primaire = 140
 
 ```js
 const formulaire = (Inputs.form({
+  enfants: Inputs.range([1, 8], {step: 1, label: "Nombre d'enfant(s) de la famille"}),
   inscrits_primaire: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en primaire calandrette"}),
   inscrits_maternelle: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en maternelle calendrette"}),
-  enfants: Inputs.range([1, 8], {step: 1, label: "Nombre d'enfant(s) de la famille"}),
   revenu_annuel: Inputs.range([0, 120000], {step: 1000, label: "revenu fiscal de référence annuel des parents ou représentant légaux"}),
   residant_toulouse: Inputs.radio(["Oui", "Non"], {label: "Résidant à Toulouse", value: null, format: (x) => x ?? "Abstain"}),
   famille_monoparentale: Inputs.radio(["Oui", "Non"], {label: "Famille monoparentale", value: null, format: (x) => x ?? "Abstain"}, 'toto')
@@ -196,22 +220,35 @@ const prix_repas_cantine =  tarifs_actes.filter(function(v) {return (v.tranche =
 const inscrits = formulaire_values['inscrits_primaire'] + formulaire_values['inscrits_maternelle']
 const nb_jours_cantine = (lmmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
 accumulator + current);
+const cout_cantine = Math.round(prix_repas_cantine*nb_jours_cantine*semaines * 100) / 100
 
 const nb_clae_matin =  (lmjv.map(d=>clae_values[d].includes('matin'))).reduce((accumulator, current) => 
 accumulator + current);
-const cout_clae_matin = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ matin']
+const prix_clae_matin = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ matin']
+const cout_clae_matin = Math.round(prix_clae_matin*nb_clae_matin*semaines*100)/100
 
 const nb_clae_soir =  (lmjv.map(d=>clae_values[d].includes('soir'))).reduce((accumulator, current) => 
 accumulator + current);
-const cout_clae_soir = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ soir']
+const prix_clae_soir = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ soir']
+const cout_clae_soir = Math.round(prix_clae_soir*nb_clae_soir*semaines*100)/100
 
 const nb_clae_midi =  (lmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
 accumulator + current);
-const cout_clae_midi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ midi']
-const statut_mercredi = clae_values['mercredi'].length
-const cout_clae_mercredi = 0
-const cout_total_clae = cout_clae_matin + nb_clae_soir + cout_clae_midi + cout_clae_mercredi
+const prix_clae_midi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ midi']
+const cout_clae_midi = Math.round(prix_clae_midi*nb_clae_midi*semaines*100)/100
 
+let prix_clae_mercredi ;
+if (clae_values['mercredi'].includes('matin') && clae_values['mercredi'].includes('soir')){
+  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]["ALSH journée"]
+}  else if (clae_values['mercredi'].includes('matin') && (!clae_values['mercredi'].includes('soir'))){
+  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]["ALSH matin"]
+}  else if ((!clae_values['mercredi'].includes('matin')) && (clae_values['mercredi'].includes('soir'))){
+  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]["ALSH a.-m."]
+} else {prix_clae_mercredi = 0}
+const cout_clae_mercredi = Math.round(prix_clae_mercredi * semaines * 100) / 100
+
+
+const cout_total_clae = Math.round((cout_clae_matin + cout_clae_midi + cout_clae_soir + cout_clae_mercredi)*100)/100
 
 const cout_asso_garoneta = Math.round((2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_asso_garoneta * 100) / 100
 const cout_asso_cor_dor = (2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_cor_doc
@@ -221,10 +258,19 @@ const cout_forfait_papier = forfait_papier * inscrits
 const cout_classe_verte = classe_verte_maternelle * formulaire_values['inscrits_maternelle'] + classe_verte_primaire * formulaire_values['inscrits_primaire']
 const cout_forfait_scolarite = forfait_scolarite.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0][inscrits] * 12
 
+
+const cout_total = Math.round((cout_asso_garoneta+cout_asso_cor_dor+cout_cotisation_federation_regionale_et_departementale+cout_cotisation_Conferation_trimestrielle+cout_forfait_papier+cout_classe_verte+cout_forfait_scolarite+ cout_cantine + cout_total_clae)*100)/100
+
+const frais_de_scolarite =  Math.round((cout_asso_garoneta + cout_asso_cor_dor+ cout_cotisation_federation_regionale_et_departementale + cout_cotisation_Conferation_trimestrielle+ cout_forfait_papier + cout_classe_verte )*100)/100
+
+const frais_de_garde = Math.round((cout_forfait_scolarite + cout_total_clae)*100)/100
+
+
 ```
 
 
 
-```js
-cout_forfait_scolarite
-```
+
+
+
+
