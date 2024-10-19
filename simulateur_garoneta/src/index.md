@@ -30,10 +30,9 @@ const classe_verte_primaire = 140
   </div>
 </div>
 
-<div class="caution", label="Attention">La simulation est réalisée en local dans votre navigateur. Aucune information n'est communiquée à l'école.</div>
-
-
-
+<div class="caution", label="Attention">La simulation est réalisée en local dans votre navigateur. Aucune information n'est communiquée à l'école.
+Le simulateur ne fonctionne pas si vous avez plus de 4 enfants à l'école. Vérifier que le nombre d'inscrits soit inférieur au nombre d'enfants.
+</div>
 
 <div class="grid grid-cols-2">
   <div class="card">
@@ -178,12 +177,10 @@ const classe_verte_primaire = 140
 </div class="card">
 
 <div class="card">
-${echarts.init(display(html`<div style="width: 600px; height:400px;"></div>`));}
- 
+<h3>Répartition des frais :</h3>
+${echart1}
 </div>
-
 </div>
-
 
 ```js
 const formulaire = (Inputs.form({
@@ -262,27 +259,55 @@ const cout_total = Math.round((cout_asso_garoneta+cout_asso_cor_dor+cout_cotisat
 const frais_de_scolarite =  Math.round((cout_asso_garoneta + cout_asso_cor_dor+ cout_cotisation_federation_regionale_et_departementale + cout_cotisation_Conferation_trimestrielle+ cout_forfait_papier + cout_classe_verte + 20 *12)*100)/100
 
 const frais_de_garde = Math.round((cout_forfait_scolarite + cout_total_clae- 20*12)*100)/100
+
+
+
 ```
 
 
-```js
 
-var div = html`<div style="width: width;height:width;" ></div>`;
-const option = {
-  title: {
-    text: "ECharts getting started example"
-  },
-  tooltip: {},
-  xAxis: {
-    data: ["shirt", "cardigan", "chiffon", "pants", "heels", "socks"]
-  },
-  yAxis: {},
-  series: [
-    {
-      name: "sales",
-      type: "bar",
-      data: [5, 20, 36, 10, 10, 20]
-    }
+```js 
+//ici je construit mon graph echart
+const echart1 = html`<div style="width: ${width/2}px; height:400px;"></div>`
+
+const myChart = echarts.init(echart1);
+
+var data = [
+  {
+    name: 'Total',
+    children: [
+      {
+        name: 'Frais de scolarité',
+        value: frais_de_scolarite,
+      },
+      {
+        name: 'Frais de garde',
+        value: frais_de_garde
+      },
+      {
+        name: 'Frais de repas',
+        value: cout_cantine
+      }
+
   ]
-};
-````
+  }
+];
+
+
+myChart.setOption({
+
+  series: {
+    type: 'sunburst',
+     emphasis: {
+         focus: 'ancestor'
+     },
+    data: data,
+    radius: [0, '90%'],
+    label: {
+      rotate: 'radial'
+    }
+  }
+  
+
+})
+```
