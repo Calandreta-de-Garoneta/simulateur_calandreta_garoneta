@@ -173,10 +173,12 @@ const classe_verte_primaire = 140
 
   </table>
 
-Soit 12 règlements mensuel de ${Math.round((cout_total/12)*100)/100}€.
+  Soit 12 règlements mensuel de ${Math.round((cout_total/12)*100)/100}€.
+
 </div class="card">
 
 <div class="card">
+${echarts.init(display(html`<div style="width: 600px; height:400px;"></div>`));}
  
 </div>
 
@@ -261,3 +263,26 @@ const frais_de_scolarite =  Math.round((cout_asso_garoneta + cout_asso_cor_dor+ 
 
 const frais_de_garde = Math.round((cout_forfait_scolarite + cout_total_clae- 20*12)*100)/100
 ```
+
+
+```js
+
+var div = html`<div style="width: width;height:width;" ></div>`;
+const option = {
+  title: {
+    text: "ECharts getting started example"
+  },
+  tooltip: {},
+  xAxis: {
+    data: ["shirt", "cardigan", "chiffon", "pants", "heels", "socks"]
+  },
+  yAxis: {},
+  series: [
+    {
+      name: "sales",
+      type: "bar",
+      data: [5, 20, 36, 10, 10, 20]
+    }
+  ]
+};
+````
