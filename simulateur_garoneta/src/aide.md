@@ -77,7 +77,7 @@ Les frais de scolarité s'articule de la façon suivante :
 Les frais de restauration sont calculés en fonction du revenu fiscal de référence (RFR).
 Pour vous situer dans une tranche : diviser le revenu fiscal du foyer par 12.
 
-<img src="/images/revenu fiscal ref.JPG" title="" alt="revenu fiscal ref" data-align="center">
+<img src="revenu_fiscal_ref.png" title="" alt="revenu fiscal ref" data-align="center">
 
 >  Grille tarifaire 2024
 
