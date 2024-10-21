@@ -34,8 +34,8 @@ const classe_verte_primaire = 140
 
 - Le simulateur a une vocation indicative et fournit une estimation approximative des frais. **Ces estimations ne sont pas opposables, et les frais réels seront confirmés lors de l'inscription définitive**.
 - La simulation est effectuée localement dans votre navigateur, **aucune information ne quitte votre navigateur**.
-- Le simulateur ne prend pas en charge les familles ayant plus de 4 enfants inscrits.
-- Assurez-vous que le nombre d'inscrits est bien inférieur ou égal au nombre d'enfants.
+- Le simulateur ne prend pas en charge les familles ayant plus de 4 enfants inscrits. Au delà de 4 enfants, il n'y a  plus de changement tarifaire.
+- Assurez-vous que le nombre d'inscrits est bien inférieur ou égal au nombre d'enfants. Si besoin prenez contact avec l'école.
 </div>
 
 <div class="grid grid-cols-2">
@@ -176,7 +176,7 @@ const classe_verte_primaire = 140
 
   </table>
 
-  <b> Soit 12 règlements mensuel de ${Math.round((cout_total/12)*100)/100}€.</b>
+  <b> Soit 10 règlements mensuel de ${Math.round((cout_total/10)*100)/100}€.</b>
 
 </div class="card">
 
@@ -188,12 +188,12 @@ ${echart1}
 
 ```js
 const formulaire = (Inputs.form({
-  enfants: Inputs.range([1, 8], {step: 1, label: "Nombre d'enfant(s) de la famille"}),
+  enfants: Inputs.range([1, 4], {step: 1, label: "Nombre d'enfant(s) de la famille"}),
   inscrits_primaire: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en primaire calandrette"}),
   inscrits_maternelle: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en maternelle calendrette"}),
   revenu_annuel: Inputs.range([0, 120000], {step: 1000, label: "revenu fiscal de référence annuel des parents ou représentant légaux"}),
-  residant_toulouse: Inputs.radio(["Oui", "Non"], {label: "Résidant à Toulouse", value: null, format: (x) => x ?? "Abstain"}),
-  famille_monoparentale: Inputs.radio(["Oui", "Non"], {label: "Famille monoparentale", value: null, format: (x) => x ?? "Abstain"}, 'toto')
+  residant_toulouse: Inputs.toggle({label: "Résidant à Toulouse", value: false}),
+  famille_monoparentale: Inputs.toggle({label: "Famille monoparentale", value: false})
 }));
 const formulaire_values = Generators.input(formulaire);
 ```
@@ -250,8 +250,8 @@ const cout_clae_mercredi = Math.round(prix_clae_mercredi * semaines * 100) / 100
 
 const cout_total_clae = Math.round((cout_clae_matin + cout_clae_midi + cout_clae_soir + cout_clae_mercredi)*100)/100
 
-const cout_asso_garoneta = Math.round((2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_asso_garoneta * 100) / 100
-const cout_asso_cor_dor = (2 - (formulaire_values['famille_monoparentale']=="Oui")) * cout_unitaire_cor_doc
+const cout_asso_garoneta = Math.round((2 - (formulaire_values['famille_monoparentale'])) * cout_unitaire_asso_garoneta * 100) / 100
+const cout_asso_cor_dor = (2 - (formulaire_values['famille_monoparentale'])) * cout_unitaire_cor_doc
 const cout_cotisation_federation_regionale_et_departementale = inscrits*(cotisation_federation_departementale + cotisation_federation_regionale)
 const cout_cotisation_Conferation_trimestrielle = cotisation_Conferation_trimestrielle * 4 * inscrits
 const cout_forfait_papier = forfait_papier * inscrits 
@@ -276,42 +276,23 @@ const echart1 = html`<div style="width: ${width/2}px; height:400px;"></div>`
 
 const myChart = echarts.init(echart1);
 
-var data = [
-  {
-    name: 'Total',
-    children: [
-      {
-        name: 'Frais de scolarité',
-        value: frais_de_scolarite,
-      },
-      {
-        name: 'Frais de garde',
-        value: frais_de_garde
-      },
-      {
-        name: 'Frais de repas',
-        value: cout_cantine
-      }
-
-  ]
-  }
-];
-
-
-myChart.setOption({
-
-  series: {
-    type: 'sunburst',
-     emphasis: {
-         focus: 'ancestor'
-     },
-    data: data,
-    radius: [0, '90%'],
-    label: {
-      rotate: 'radial'
+const option = {
+  xAxis: {
+    type: 'category',
+    data: ['Scolarité', 'Garde', 'Repas']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: [frais_de_scolarite, frais_de_garde, cout_cantine],
+      type: 'bar'
     }
-  }
-  
+  ]
+};
 
-})
+
+
+myChart.setOption(option)
 ```
