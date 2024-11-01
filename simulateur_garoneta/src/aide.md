@@ -196,3 +196,104 @@ Le mercredi, les enfants peuvent être accueillis soit pour une demi-journée, s
 | 9 : 4 500 à 6 000 €               | 12,78 €                   | 12,24 €                   | 11,34 €                         |
 | 10 : 6 000 à 8 000 €               | 13,86 €                   | 13,32 €                   | 12,42 €                         |
 | 11 : 8 000 € et plus               | 15,30 €                   | 14,94 €                   | 14,04 €                         |
+
+
+
+<style>
+body p { 
+    font-family: 'merriweatherregular' !important;
+    font-weight: normal;
+    font-size: .9rem !important;
+    line-height: 1.8 !important;
+    color:#444444
+}
+body strong {
+    font-family: 'merriweatherbold' !important;	
+}
+body em {
+   font-family: 'merriweatheritalic' !important; 
+}
+body a:hover{
+    text-decoration: underline;
+    text-decoration-skip: ink!important;
+    color:#6f2200;
+}
+body a{
+	/*text-decoration: underline!important;*/
+}
+p{
+  -webkit-font-smoothing: antialiased!important;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'merriweatherregular';
+}
+h1,h2,h3,h4,h5,h6 {
+  letter-spacing: 0.05em !important;
+  font-weight: normal !important;
+}
+h1 {
+  font-family: oswaldmedium !important;
+  text-transform: uppercase !important;
+  text-align:center !important;
+  font-size:2.5em!important;
+  line-height:1.2em!important;
+  color: #444444 !important;
+  margin: 10px 0px 10px 0px !important;
+}
+.row .col.section-title h1 { 
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.single #single-below-header {
+  margin-bottom: 18px !important;
+  }
+h2 {
+  font-family: oswaldmedium !important;
+  text-transform: uppercase !important;
+  font-size:1.6em!important;
+  line-height:1.1em!important;
+  color: #b54512 ;
+  margin: 20px 0px 10px 0px !important;}
+h3 {
+  letter-spacing: 0.05em !important;
+  font-family: oswaldregular !important;
+  text-transform: uppercase !important;
+  font-size:1.5em!important;
+  line-height:1.2em!important;
+  margin: 20px 0px 10px 0px !important;
+}
+.chapeau p { 
+  font-family: inherit;
+  color:#000000 !important;
+  font-size: 1.4em !important;
+  line-height: 1.8em !important;
+}
+.soustitre h2 {
+  font-family: oswaldregular !important;
+  text-transform: none!important;
+  font-size:2.1em!important;
+  line-height:1.1em!important;
+  color: #3fbfeb ;
+  margin: 20px 0px 5px 0px !important;}
+}
+.citation-box {
+  background-color: #FFFFFF !important;
+  padding: 40px !important;
+  margin: 0px !important;
+}
+.citation-box p {
+  font-family: merriweatheritalic !important;
+  font-size:1.3em !important;
+  color: #3b7386;
+  background-color: #FFFFFF !important;
+  padding: 40px !important;
+  margin: 0 10% !important;
+}
+.container-wrap body{
+  padding-top: 0px;
+}
+.page-header-no-bg {
+  padding-top: 0px !important;
+  margin-top: 0px !important;
+}
+
+</style>  
