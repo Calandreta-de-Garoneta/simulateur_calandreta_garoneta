@@ -16,8 +16,8 @@ const cotisation_federation_regionale = 10
 const cotisation_federation_departementale = 3
 const cotisation_Conferation_trimestrielle = 14 
 const forfait_papier = 6
-const classe_verte_maternelle = 80
-const classe_verte_primaire = 140
+const classe_verte_maternelle = 60
+const classe_verte_primaire = 180
 ```
 
 <div class="grid grid-cols-2">
@@ -36,6 +36,7 @@ const classe_verte_primaire = 140
 - La simulation est effectuée localement dans votre navigateur, **aucune information ne quitte votre navigateur**.
 - Le simulateur ne prend pas en charge les familles ayant plus de 4 enfants inscrits. Au delà de 4 enfants, il n'y a  plus de changement tarifaire.
 - Assurez-vous que le nombre d'inscrits est bien inférieur ou égal au nombre d'enfants. Si besoin prenez contact avec l'école.
+- Veuillez consulter l'[aide](./aide) pour savoir comment trouver votre revenu de référence ou obtenir de plus amples informations sur les frais et la tarification. 
 </div>
 
 <div class="grid grid-cols-2">
@@ -53,7 +54,7 @@ const classe_verte_primaire = 140
   <div class="card">
     <h3>Barême de tarification CLAE et Cantine</h3>
 
-  Vos revenus mensuels sont de ${revenu_mensuel}€, votre tranche de revenu définie par la mairie de Toulouse est ${tranche_revenu['tranche']} (correspondant aux revenus compris entre  ${tranche_revenu['min']}€ et ${tranche_revenu['max']}€). Eu égard à votre nombre d'enfants, vos tarifs de CLAE et cantine seront ${tranche_revenu['tranche']}${lettre}.
+  Eu égard à votre nombre d'enfants et votre revenu de référence, vos [tarifs de CLAE et cantine](./aide) seront ${tranche_revenu}${lettre}.
 
 <table>
   <tr>
@@ -150,6 +151,7 @@ const classe_verte_primaire = 140
 </div>
 
 <div class="card">
+
   <h3>A reporter sur l'attestation :</h3>
   <table>
     <tr>
@@ -176,7 +178,16 @@ const classe_verte_primaire = 140
 
   </table>
 
-  <b> Soit 10 règlements mensuel de ${Math.round((cout_total/10)*100)/100}€.</b>
+Le règlement se fera :
+
+<b>CLAE, FRAIS DE GESTION MENSUELLE, CANTINE </b>
+- Une facture mensuelle entre septembre et juin (au réel)
+- Une facture de régularisation en juillet
+
+<b>ADHÉSION, SOUTIEN FÉDÉRATIONS, FORFAIT PAPIER</b>
+- Une facture annuelle en septembre
+
+Appel à provisions classes vertes se fera par Hello Asso
 
 </div class="card">
 
@@ -192,7 +203,7 @@ const formulaire = (Inputs.form({
   inscrits_primaire: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en primaire calandrette"}),
   inscrits_maternelle: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en maternelle calendrette"}),
   revenu_annuel: Inputs.range([0, 120000], {step: 1000, label: "revenu fiscal de référence annuel des parents ou représentant légaux"}),
-  residant_toulouse: Inputs.toggle({label: "Résidant à Toulouse", value: false}),
+  parents_separes: Inputs.toggle({label: "Parents séparés", value: false}),
   famille_monoparentale: Inputs.toggle({label: "Famille monoparentale", value: false})
 }));
 const formulaire_values = Generators.input(formulaire);
@@ -212,9 +223,10 @@ const clae_values = Generators.input(clae);
 ```js
 // je calcule le revenu mensuel de reference et la tranche de revenu
 const revenu_mensuel = Math.floor(formulaire_values['revenu_annuel'] / 12)   
-const tranche_revenu =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]
+const tranche_revenu_brut =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]['tranche']
+const tranche_revenu = Math.max(tranche_revenu_brut - 1 * formulaire_values['parents_separes'],1)  ;
 const lettre = ['A', 'B', 'C'][Math.min(formulaire_values['enfants'], 3)-1] 
-const prix_repas_cantine =  tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['Repas cantine']
+const prix_repas_cantine =  tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]['Repas cantine']
 ```
 
 ```js
@@ -225,26 +237,26 @@ const cout_cantine = Math.round(prix_repas_cantine*nb_jours_cantine*semaines * 1
 
 const nb_clae_matin =  (lmjv.map(d=>clae_values[d].includes('matin'))).reduce((accumulator, current) => 
 accumulator + current);
-const prix_clae_matin = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ matin']
+const prix_clae_matin = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]['CLAÉ matin']
 const cout_clae_matin = Math.round(prix_clae_matin*nb_clae_matin*semaines*100)/100
 
 const nb_clae_soir =  (lmjv.map(d=>clae_values[d].includes('soir'))).reduce((accumulator, current) => 
 accumulator + current);
-const prix_clae_soir = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ soir']
+const prix_clae_soir = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]['CLAÉ soir']
 const cout_clae_soir = Math.round(prix_clae_soir*nb_clae_soir*semaines*100)/100
 
 const nb_clae_midi =  (lmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
 accumulator + current);
-const prix_clae_midi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]['CLAÉ midi']
+const prix_clae_midi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]['CLAÉ midi']
 const cout_clae_midi = Math.round(prix_clae_midi*nb_clae_midi*semaines*100)/100
 
 let prix_clae_mercredi ;
 if (clae_values['mercredi'].includes('matin') && clae_values['mercredi'].includes('soir')){
-  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]["ALSH journée"]
+  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]["ALSH journée"]
 }  else if (clae_values['mercredi'].includes('matin') && (!clae_values['mercredi'].includes('soir'))){
-  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]["ALSH matin"]
+  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]["ALSH matin"]
 }  else if ((!clae_values['mercredi'].includes('matin')) && (clae_values['mercredi'].includes('soir'))){
-  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0]["ALSH a.-m."]
+  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]["ALSH a.-m."]
 } else {prix_clae_mercredi = 0}
 const cout_clae_mercredi = Math.round(prix_clae_mercredi * semaines * 100) / 100
 
@@ -256,15 +268,13 @@ const cout_cotisation_federation_regionale_et_departementale = inscrits*(cotisat
 const cout_cotisation_Conferation_trimestrielle = cotisation_Conferation_trimestrielle * 4 * inscrits
 const cout_forfait_papier = forfait_papier * inscrits 
 const cout_classe_verte = classe_verte_maternelle * formulaire_values['inscrits_maternelle'] + classe_verte_primaire * formulaire_values['inscrits_primaire']
-const cout_forfait_scolarite = forfait_scolarite.filter(function(v) {return (v.tranche ==tranche_revenu['tranche']) & (v.lettre == lettre);})[0][inscrits] * 12
+const cout_forfait_scolarite = forfait_scolarite.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0][inscrits] * 12
 
 const cout_total = Math.round((cout_asso_garoneta+cout_asso_cor_dor+cout_cotisation_federation_regionale_et_departementale+cout_cotisation_Conferation_trimestrielle+cout_forfait_papier+cout_classe_verte+cout_forfait_scolarite+ cout_cantine + cout_total_clae)*100)/100
 
 const frais_de_scolarite =  Math.round((cout_asso_garoneta + cout_asso_cor_dor+ cout_cotisation_federation_regionale_et_departementale + cout_cotisation_Conferation_trimestrielle+ cout_forfait_papier + cout_classe_verte + 20 *12)*100)/100
 
 const frais_de_garde = Math.round((cout_forfait_scolarite + cout_total_clae- 20*12)*100)/100
-
-
 
 ```
 
