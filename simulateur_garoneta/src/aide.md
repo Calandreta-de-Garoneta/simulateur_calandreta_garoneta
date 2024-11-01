@@ -64,11 +64,9 @@ Les frais de scolarité s'articule de la façon suivante :
 
 - Classe verte (provision)
   
-  > Maternelle: 80€
+  > Maternelle: 60€
   
-  
-  
-  > Primaire: 140
+  > Primaire: 180
 
 
 
