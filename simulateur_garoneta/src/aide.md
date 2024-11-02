@@ -12,7 +12,7 @@ Les frais de scolarité s'articule de la façon suivante :
 
 - Contribution Garoneta
   
-  > 220 € 
+  > 240 € 
 
 - Association Garonetta
   
