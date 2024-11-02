@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.12.0">
+<title>Simulateur scolarité Calendreta de Garoneta</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.3268c726.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight.3268c726.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="modulepreload" href="./_observablehq/client.030781a2.js">
+<link rel="modulepreload" href="./_observablehq/runtime.041d6d5a.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.4dbd969b.js">
+<link rel="modulepreload" href="./_npm/echarts@5.5.1/dist/echarts.esm.min.js.aaf512c2.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/063eb405.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.b554ae79.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/c68fbd73.js">
+<link rel="icon" href="./_file/cropped-Garoneta_carre-32x32.afcc2931.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.030781a2.js";
+import {registerFile} from "./_observablehq/stdlib.4dbd969b.js";
+
+registerFile("./data/forfait_scolarite.json", {"name":"./data/forfait_scolarite.json","mimeType":"application/json","path":"./_file/data/forfait_scolarite.9908f4bf.json","lastModified":1730494886365,"size":3232});
+registerFile("./data/tarifs_actes.json", {"name":"./data/tarifs_actes.json","mimeType":"application/json","path":"./_file/data/tarifs_actes.48caa9fa.json","lastModified":1730494886365,"size":7191});
+registerFile("./data/tranche_revenu.json", {"name":"./data/tranche_revenu.json","mimeType":"application/json","path":"./_file/data/tranche_revenu.d7fb26a9.json","lastModified":1730494886365,"size":663});
+
+define({id: "92a8655e", inputs: ["FileAttachment"], outputs: ["tranches","tarifs_actes","forfait_scolarite","semaines","lmjv","lmmjv","cout_unitaire_asso_garoneta","cout_unitaire_cor_doc","cotisation_federation_regionale","cotisation_federation_departementale","cotisation_Conferation_trimestrielle","forfait_papier","classe_verte_maternelle","classe_verte_primaire"], body: (FileAttachment) => {
+// je charge les tranches de revenus
+const tranches = FileAttachment("./data/tranche_revenu.json").json()
+const tarifs_actes = FileAttachment("./data/tarifs_actes.json").json()
+const forfait_scolarite = FileAttachment("./data/forfait_scolarite.json").json()
+const semaines = 36 
+const lmjv = ['lundi', 'mardi', 'jeudi', 'vendredi']
+const lmmjv = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
+const cout_unitaire_asso_garoneta = 10
+const cout_unitaire_cor_doc = 2
+const cotisation_federation_regionale = 10
+const cotisation_federation_departementale = 3
+const cotisation_Conferation_trimestrielle = 14 
+const forfait_papier = 6
+const classe_verte_maternelle = 60
+const classe_verte_primaire = 180
+return {tranches,tarifs_actes,forfait_scolarite,semaines,lmjv,lmmjv,cout_unitaire_asso_garoneta,cout_unitaire_cor_doc,cotisation_federation_regionale,cotisation_federation_departementale,cotisation_Conferation_trimestrielle,forfait_papier,classe_verte_maternelle,classe_verte_primaire};
+}});
+
+define({id: "50d0a342", mode: "inline", inputs: ["formulaire","display"], body: async (formulaire,display) => {
+display(await(
+formulaire
+))
+}});
+
+define({id: "be920a6c", mode: "inline", inputs: ["clae","display"], body: async (clae,display) => {
+display(await(
+clae
+))
+}});
+
+define({id: "6856d6f4", mode: "inline", inputs: ["tranche_revenu","display"], body: async (tranche_revenu,display) => {
+display(await(
+tranche_revenu
+))
+}});
+
+define({id: "1a48b8a2", mode: "inline", inputs: ["lettre","display"], body: async (lettre,display) => {
+display(await(
+lettre
+))
+}});
+
+define({id: "8784a698", mode: "inline", inputs: ["prix_clae_matin","display"], body: async (prix_clae_matin,display) => {
+display(await(
+prix_clae_matin
+))
+}});
+
+define({id: "e135b997", mode: "inline", inputs: ["cout_clae_matin","display"], body: async (cout_clae_matin,display) => {
+display(await(
+cout_clae_matin
+))
+}});
+
+define({id: "5efacf5c", mode: "inline", inputs: ["prix_clae_midi","display"], body: async (prix_clae_midi,display) => {
+display(await(
+prix_clae_midi
+))
+}});
+
+define({id: "d5ca3c24", mode: "inline", inputs: ["cout_clae_midi","display"], body: async (cout_clae_midi,display) => {
+display(await(
+cout_clae_midi
+))
+}});
+
+define({id: "370027e1", mode: "inline", inputs: ["prix_clae_soir","display"], body: async (prix_clae_soir,display) => {
+display(await(
+prix_clae_soir
+))
+}});
+
+define({id: "d1d353ee", mode: "inline", inputs: ["cout_clae_soir","display"], body: async (cout_clae_soir,display) => {
+display(await(
+cout_clae_soir
+))
+}});
+
+define({id: "f6f28e3d", mode: "inline", inputs: ["prix_clae_mercredi","display"], body: async (prix_clae_mercredi,display) => {
+display(await(
+prix_clae_mercredi
+))
+}});
+
+define({id: "190c1c3b", mode: "inline", inputs: ["cout_clae_mercredi","display"], body: async (cout_clae_mercredi,display) => {
+display(await(
+cout_clae_mercredi
+))
+}});
+
+define({id: "323249f0", mode: "inline", inputs: ["prix_repas_cantine","display"], body: async (prix_repas_cantine,display) => {
+display(await(
+prix_repas_cantine
+))
+}});
+
+define({id: "1212b0a1", mode: "inline", inputs: ["cout_cantine","display"], body: async (cout_cantine,display) => {
+display(await(
+cout_cantine
+))
+}});
+
+define({id: "6cb18007", mode: "inline", inputs: ["cout_asso_garoneta","display"], body: async (cout_asso_garoneta,display) => {
+display(await(
+cout_asso_garoneta
+))
+}});
+
+define({id: "e47f61ba", mode: "inline", inputs: ["cout_asso_cor_dor","display"], body: async (cout_asso_cor_dor,display) => {
+display(await(
+cout_asso_cor_dor
+))
+}});
+
+define({id: "bb2af6ed", mode: "inline", inputs: ["cout_forfait_scolarite","display"], body: async (cout_forfait_scolarite,display) => {
+display(await(
+cout_forfait_scolarite
+))
+}});
+
+define({id: "0d859fda", mode: "inline", inputs: ["cout_cotisation_federation_regionale_et_departementale","display"], body: async (cout_cotisation_federation_regionale_et_departementale,display) => {
+display(await(
+cout_cotisation_federation_regionale_et_departementale
+))
+}});
+
+define({id: "363d8ffc", mode: "inline", inputs: ["cout_cotisation_Conferation_trimestrielle","display"], body: async (cout_cotisation_Conferation_trimestrielle,display) => {
+display(await(
+cout_cotisation_Conferation_trimestrielle
+))
+}});
+
+define({id: "12693961", mode: "inline", inputs: ["cout_forfait_papier","display"], body: async (cout_forfait_papier,display) => {
+display(await(
+cout_forfait_papier
+))
+}});
+
+define({id: "96d978ed", mode: "inline", inputs: ["cout_classe_verte","display"], body: async (cout_classe_verte,display) => {
+display(await(
+cout_classe_verte
+))
+}});
+
+define({id: "1212b0a1-1", mode: "inline", inputs: ["cout_cantine","display"], body: async (cout_cantine,display) => {
+display(await(
+cout_cantine
+))
+}});
+
+define({id: "275a8ef3", mode: "inline", inputs: ["cout_total_clae","display"], body: async (cout_total_clae,display) => {
+display(await(
+cout_total_clae
+))
+}});
+
+define({id: "4f87f0d2", mode: "inline", inputs: ["cout_total","display"], body: async (cout_total,display) => {
+display(await(
+cout_total
+))
+}});
+
+define({id: "a48eac1b", mode: "inline", inputs: ["frais_de_scolarite","display"], body: async (frais_de_scolarite,display) => {
+display(await(
+frais_de_scolarite
+))
+}});
+
+define({id: "e82ddacd", mode: "inline", inputs: ["frais_de_garde","display"], body: async (frais_de_garde,display) => {
+display(await(
+frais_de_garde
+))
+}});
+
+define({id: "1212b0a1-2", mode: "inline", inputs: ["cout_cantine","display"], body: async (cout_cantine,display) => {
+display(await(
+cout_cantine
+))
+}});
+
+define({id: "4f87f0d2-1", mode: "inline", inputs: ["cout_total","display"], body: async (cout_total,display) => {
+display(await(
+cout_total
+))
+}});
+
+define({id: "020dfc5d", mode: "inline", inputs: ["echart1","display"], body: async (echart1,display) => {
+display(await(
+echart1
+))
+}});
+
+define({id: "c83a8a8a", inputs: ["Inputs","Generators"], outputs: ["formulaire","formulaire_values"], body: (Inputs,Generators) => {
+const formulaire = (Inputs.form({
+  enfants: Inputs.range([1, 4], {step: 1, label: "Nombre d'enfant(s) de la famille"}),
+  inscrits_primaire: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en primaire calandrette"}),
+  inscrits_maternelle: Inputs.range([0, 3], {step: 1, label: "Nombre d'inscrit(s) en maternelle calendrette"}),
+  revenu_annuel: Inputs.range([0, 120000], {step: 1000, label: "revenu fiscal de référence annuel des parents ou représentant légaux"}),
+  parents_separes: Inputs.toggle({label: "Parents séparés", value: false}),
+  famille_monoparentale: Inputs.toggle({label: "Famille monoparentale", value: false})
+}));
+const formulaire_values = Generators.input(formulaire);
+return {formulaire,formulaire_values};
+}});
+
+define({id: "783ac384", inputs: ["Inputs","Generators"], outputs: ["clae","clae_values"], body: (Inputs,Generators) => {
+const clae = (Inputs.form({
+  lundi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "lundi"}),
+  mardi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "mardi"}),
+  mercredi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "mercredi"}),
+  jeudi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "jeudi"}),
+  vendredi: Inputs.checkbox(["matin", "déjeuner", "soir"], {label: "vendredi"})
+}));
+const clae_values = Generators.input(clae);
+return {clae,clae_values};
+}});
+
+define({id: "49e46965", inputs: ["formulaire_values","tranches","tarifs_actes"], outputs: ["revenu_mensuel","tranche_revenu_brut","tranche_revenu","lettre","prix_repas_cantine"], body: (formulaire_values,tranches,tarifs_actes) => {
+// je calcule le revenu mensuel de reference et la tranche de revenu
+const revenu_mensuel = Math.floor(formulaire_values['revenu_annuel'] / 12)   
+const tranche_revenu_brut =  tranches.filter(function(v) {return (v.min <= revenu_mensuel) & (v.max> revenu_mensuel);})[0]['tranche']
+const tranche_revenu = Math.max(tranche_revenu_brut - 1 * formulaire_values['parents_separes'],1)  ;
+const lettre = ['A', 'B', 'C'][Math.min(formulaire_values['enfants'], 3)-1] 
+const prix_repas_cantine =  tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]['Repas cantine']
+return {revenu_mensuel,tranche_revenu_brut,tranche_revenu,lettre,prix_repas_cantine};
+}});
+
+define({id: "3cda7b6d", inputs: ["formulaire_values","lmmjv","clae_values","prix_repas_cantine","semaines","lmjv","tarifs_actes","tranche_revenu","lettre","cout_unitaire_asso_garoneta","cout_unitaire_cor_doc","cotisation_federation_departementale","cotisation_federation_regionale","cotisation_Conferation_trimestrielle","forfait_papier","classe_verte_maternelle","classe_verte_primaire","forfait_scolarite"], outputs: ["inscrits","nb_jours_cantine","cout_cantine","nb_clae_matin","prix_clae_matin","cout_clae_matin","nb_clae_soir","prix_clae_soir","cout_clae_soir","nb_clae_midi","prix_clae_midi","cout_clae_midi","prix_clae_mercredi","cout_clae_mercredi","cout_total_clae","cout_asso_garoneta","cout_asso_cor_dor","cout_cotisation_federation_regionale_et_departementale","cout_cotisation_Conferation_trimestrielle","cout_forfait_papier","cout_classe_verte","cout_forfait_scolarite","cout_total","frais_de_scolarite","frais_de_garde"], body: (formulaire_values,lmmjv,clae_values,prix_repas_cantine,semaines,lmjv,tarifs_actes,tranche_revenu,lettre,cout_unitaire_asso_garoneta,cout_unitaire_cor_doc,cotisation_federation_departementale,cotisation_federation_regionale,cotisation_Conferation_trimestrielle,forfait_papier,classe_verte_maternelle,classe_verte_primaire,forfait_scolarite) => {
+const inscrits = formulaire_values['inscrits_primaire'] + formulaire_values['inscrits_maternelle']
+const nb_jours_cantine = (lmmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
+accumulator + current);
+const cout_cantine = Math.round(prix_repas_cantine*nb_jours_cantine*semaines * 100) / 100
+
+const nb_clae_matin =  (lmjv.map(d=>clae_values[d].includes('matin'))).reduce((accumulator, current) => 
+accumulator + current);
+const prix_clae_matin = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]['CLAÉ matin']
+const cout_clae_matin = Math.round(prix_clae_matin*nb_clae_matin*semaines*100)/100
+
+const nb_clae_soir =  (lmjv.map(d=>clae_values[d].includes('soir'))).reduce((accumulator, current) => 
+accumulator + current);
+const prix_clae_soir = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]['CLAÉ soir']
+const cout_clae_soir = Math.round(prix_clae_soir*nb_clae_soir*semaines*100)/100
+
+const nb_clae_midi =  (lmjv.map(d=>clae_values[d].includes('déjeuner'))).reduce((accumulator, current) => 
+accumulator + current);
+const prix_clae_midi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]['CLAÉ midi']
+const cout_clae_midi = Math.round(prix_clae_midi*nb_clae_midi*semaines*100)/100
+
+let prix_clae_mercredi ;
+if (clae_values['mercredi'].includes('matin') && clae_values['mercredi'].includes('soir')){
+  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]["ALSH journée"]
+}  else if (clae_values['mercredi'].includes('matin') && (!clae_values['mercredi'].includes('soir'))){
+  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]["ALSH matin"]
+}  else if ((!clae_values['mercredi'].includes('matin')) && (clae_values['mercredi'].includes('soir'))){
+  prix_clae_mercredi = tarifs_actes.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0]["ALSH a.-m."]
+} else {prix_clae_mercredi = 0}
+const cout_clae_mercredi = Math.round(prix_clae_mercredi * semaines * 100) / 100
+
+const cout_total_clae = Math.round((cout_clae_matin + cout_clae_midi + cout_clae_soir + cout_clae_mercredi)*100)/100
+
+const cout_asso_garoneta = Math.round((2 - (formulaire_values['famille_monoparentale'])) * cout_unitaire_asso_garoneta * 100) / 100
+const cout_asso_cor_dor = (2 - (formulaire_values['famille_monoparentale'])) * cout_unitaire_cor_doc
+const cout_cotisation_federation_regionale_et_departementale = inscrits*(cotisation_federation_departementale + cotisation_federation_regionale)
+const cout_cotisation_Conferation_trimestrielle = cotisation_Conferation_trimestrielle * 4 * inscrits
+const cout_forfait_papier = forfait_papier * inscrits 
+const cout_classe_verte = classe_verte_maternelle * formulaire_values['inscrits_maternelle'] + classe_verte_primaire * formulaire_values['inscrits_primaire']
+const cout_forfait_scolarite = forfait_scolarite.filter(function(v) {return (v.tranche ==tranche_revenu) & (v.lettre == lettre);})[0][inscrits] * 12
+
+const cout_total = Math.round((cout_asso_garoneta+cout_asso_cor_dor+cout_cotisation_federation_regionale_et_departementale+cout_cotisation_Conferation_trimestrielle+cout_forfait_papier+cout_classe_verte+cout_forfait_scolarite+ cout_cantine + cout_total_clae)*100)/100
+
+const frais_de_scolarite =  Math.round((cout_asso_garoneta + cout_asso_cor_dor+ cout_cotisation_federation_regionale_et_departementale + cout_cotisation_Conferation_trimestrielle+ cout_forfait_papier + cout_classe_verte + 20 *12)*100)/100
+
+const frais_de_garde = Math.round((cout_forfait_scolarite + cout_total_clae- 20*12)*100)/100
+
+return {inscrits,nb_jours_cantine,cout_cantine,nb_clae_matin,prix_clae_matin,cout_clae_matin,nb_clae_soir,prix_clae_soir,cout_clae_soir,nb_clae_midi,prix_clae_midi,cout_clae_midi,prix_clae_mercredi,cout_clae_mercredi,cout_total_clae,cout_asso_garoneta,cout_asso_cor_dor,cout_cotisation_federation_regionale_et_departementale,cout_cotisation_Conferation_trimestrielle,cout_forfait_papier,cout_classe_verte,cout_forfait_scolarite,cout_total,frais_de_scolarite,frais_de_garde};
+}});
+
+define({id: "e98ffec9", inputs: ["html","width","echarts","frais_de_scolarite","frais_de_garde","cout_cantine"], outputs: ["echart1","myChart","option"], body: (html,width,echarts,frais_de_scolarite,frais_de_garde,cout_cantine) => {
+//ici je construit mon graph echart
+const echart1 = html`<div style="width: ${width/2}px; height:400px;"></div>`
+
+const myChart = echarts.init(echart1);
+
+const option = {
+  xAxis: {
+    type: 'category',
+    data: ['Scolarité', 'Garde', 'Repas']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: [frais_de_scolarite, frais_de_garde, cout_cantine],
+      type: 'bar'
+    }
+  ]
+};
+
+
+
+myChart.setOption(option)
+return {echart1,myChart,option};
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link observablehq-link-active"><a href="./">Simulateur scolarité Calendreta de Garoneta</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./aide">Aide</a></li>
+  </ol>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<div class="observablehq observablehq--block"><!--:92a8655e:--></div>
+<div class="grid grid-cols-2">
+  <div>
+    <a href="https://calandretadegaroneta.org/" target="_blank" rel="noopener noreferrer"><img src="./_file/Garoneta_logo3C.4cdb349a.png"></a> 
+    <h4> Année Scolaire 2024-2025 </h4>
+  </div>
+  <div>
+    <h2>Simulateur de Frais de Scolarité - Jours de Présence au CLAE</h2>
+  </div>
+</div>
+<div class="caution" ,="" label="Attention !">
+<ul>
+<li>Le simulateur a une vocation indicative et fournit une estimation approximative des frais. <strong>Ces estimations ne sont pas opposables, et les frais réels seront confirmés lors de l'inscription définitive</strong>.</li>
+<li>La simulation est effectuée localement dans votre navigateur, <strong>aucune information ne quitte votre navigateur</strong>.</li>
+<li>Le simulateur ne prend pas en charge les familles ayant plus de 4 enfants inscrits. Au delà de 4 enfants, il n'y a  plus de changement tarifaire.</li>
+<li>Assurez-vous que le nombre d'inscrits est bien inférieur ou égal au nombre d'enfants. Si besoin prenez contact avec l'école.</li>
+<li>Veuillez consulter l'<a href="./aide">aide</a> pour savoir comment trouver votre revenu de référence ou obtenir de plus amples informations sur les frais et la tarification.</li>
+</ul>
+</div>
+<div class="grid grid-cols-2">
+  <div class="card">
+    <h3> Informations familiales : </h3>
+    <observablehq-loading></observablehq-loading><!--:50d0a342:-->
+  </div>  
+  <div class="card">
+    <h3> Périodes de CLAE envisagées : </h3>
+    <observablehq-loading></observablehq-loading><!--:be920a6c:-->
+    <br><br>
+    <h4>Le déjeuner comprend la CLAE ainsi que la cantine.</h4>
+  </div>
+  <div class="card">
+    <h3>Barême de tarification CLAE et Cantine</h3>
+<p>Eu égard à votre nombre d'enfants et votre revenu de référence, vos <a href="./aide">tarifs de CLAE et cantine</a> seront <observablehq-loading></observablehq-loading><!--:6856d6f4:--><observablehq-loading></observablehq-loading><!--:1a48b8a2:-->.</p>
+<table>
+  <tbody><tr>
+    <td></td>
+    <td>Coût unitaire</td>
+    <td>Coût total</td>
+  </tr>
+  <tr>
+    <td>CLAE matin</td>
+    <td><observablehq-loading></observablehq-loading><!--:8784a698:--> €</td>
+    <td><observablehq-loading></observablehq-loading><!--:e135b997:--> €</td>
+  </tr>
+  <tr>
+    <td>CLAE midi</td>
+    <td><observablehq-loading></observablehq-loading><!--:5efacf5c:--> €</td>
+    <td><observablehq-loading></observablehq-loading><!--:d5ca3c24:--> €</td>
+  </tr>
+  <tr>
+    <td>CLAE soir</td>
+    <td><observablehq-loading></observablehq-loading><!--:370027e1:--> €</td>
+    <td><observablehq-loading></observablehq-loading><!--:d1d353ee:--> €</td>
+  </tr>
+  <tr>
+    <td>CLSH (mercredi)</td>
+    <td><observablehq-loading></observablehq-loading><!--:f6f28e3d:--> €</td>
+    <td><observablehq-loading></observablehq-loading><!--:190c1c3b:--> €</td>
+  </tr>
+  <tr>
+    <td>Cantine</td>
+    <td><observablehq-loading></observablehq-loading><!--:323249f0:--></td>
+    <td><observablehq-loading></observablehq-loading><!--:1212b0a1:--> €</td>
+  </tr>  
+</tbody></table>
+  </div>
+<div class="card">
+  <h3> Vos Frais de scolarité annuels sont estimés ainsi :  </h3>
+<table>
+  <tbody><tr>
+    <td></td>
+    <td>Coût</td>
+  </tr>
+  <tr>
+    <td>Adhésion Asso Garoneta</td>
+    <td><observablehq-loading></observablehq-loading><!--:6cb18007:--> €</td>
+  </tr>
+  <tr>
+    <td>Adhésion Asso Cor D'oc</td>
+    <td><observablehq-loading></observablehq-loading><!--:e47f61ba:--> €</td>
+  </tr>
+  <tr>
+    <td>Participation  gestion CLAE/Frais scolarité</td>
+    <td><observablehq-loading></observablehq-loading><!--:bb2af6ed:--> €</td>
+  </tr>
+  <tr>
+    <td>Cotisation Fédération Régionale et Départementale</td>
+    <td><observablehq-loading></observablehq-loading><!--:0d859fda:--> €</td>
+  </tr>
+  <tr>
+    <td>Cotisation Confédération</td>
+    <td><observablehq-loading></observablehq-loading><!--:363d8ffc:--> €</td>
+    </tr>
+  <tr>
+    <td>Forfait Papier</td>
+    <td><observablehq-loading></observablehq-loading><!--:12693961:--> €</td> 
+  </tr>
+  <tr>
+    <td>Provision Classe Verte</td>
+    <td><observablehq-loading></observablehq-loading><!--:96d978ed:--> €</td>
+  </tr>
+  <tr>
+    <td>Cantine</td>
+    <td><observablehq-loading></observablehq-loading><!--:1212b0a1-1:--></td>
+  </tr>
+  <tr>
+    <td>CLAE / CLSH</td>  
+    <td><observablehq-loading></observablehq-loading><!--:275a8ef3:--> €</td>
+  </tr>
+  <tr>
+    <td><b>Total</b></td>  
+    <td><observablehq-loading></observablehq-loading><!--:4f87f0d2:--> €</td>
+  </tr>
+</tbody></table>
+</div>
+<div class="card">
+  <h3>A reporter sur l'attestation :</h3>
+  <table>
+    <tbody><tr>
+     <td>Répartition des coûts</td>
+     <td>Coût</td>
+    </tr>
+    <tr>
+     <td>Frais de scolarité</td>
+     <td><observablehq-loading></observablehq-loading><!--:a48eac1b:--> €</td>
+    </tr>
+    <tr>
+      <td>Frais de garde</td>
+      <td><observablehq-loading></observablehq-loading><!--:e82ddacd:--> €</td>
+    </tr>
+    <tr>
+      <td>Frais de repas</td>
+      <td><observablehq-loading></observablehq-loading><!--:1212b0a1-2:--> €</td>
+    </tr>
+    <tr>
+      <td><b>Total </b></td>
+      <td><observablehq-loading></observablehq-loading><!--:4f87f0d2-1:--> €</td>
+    </tr>
+  </tbody></table>
+<p>Le règlement se fera :</p>
+<p><b>CLAE, FRAIS DE GESTION MENSUELLE, CANTINE </b></p>
+<ul>
+<li>Une facture mensuelle entre septembre et juin (au réel)</li>
+<li>Une facture de régularisation en juillet</li>
+</ul>
+<p><b>ADHÉSION, SOUTIEN FÉDÉRATIONS, FORFAIT PAPIER</b></p>
+<ul>
+<li>Une facture annuelle en septembre</li>
+</ul>
+<p>Appel à provisions classes vertes se fera par Hello Asso</p>
+</div>
+<div class="card">
+<h3>Répartition des frais :</h3>
+<observablehq-loading></observablehq-loading><!--:020dfc5d:-->
+</div>
+</div>
+<div class="observablehq observablehq--block"><!--:c83a8a8a:--></div>
+<div class="observablehq observablehq--block"><!--:783ac384:--></div>
+<div class="observablehq observablehq--block"><!--:49e46965:--></div>
+<div class="observablehq observablehq--block"><!--:3cda7b6d:--></div>
+<div class="observablehq observablehq--block"><!--:e98ffec9:--></div>
+<style>
+body p { 
+    font-family: 'merriweatherregular' !important;
+    font-weight: normal;
+    font-size: .9rem !important;
+    line-height: 1.8 !important;
+    color:#444444
+}
+body strong {
+    font-family: 'merriweatherbold' !important;	
+}
+body em {
+   font-family: 'merriweatheritalic' !important; 
+}
+body a:hover{
+    text-decoration: underline;
+    text-decoration-skip: ink!important;
+    color:#6f2200;
+}
+body a{
+	/*text-decoration: underline!important;*/
+}
+p{
+  -webkit-font-smoothing: antialiased!important;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'merriweatherregular';
+}
+h1,h2,h3,h4,h5,h6 {
+  letter-spacing: 0.05em !important;
+  font-weight: normal !important;
+}
+h1 {
+  font-family: oswaldmedium !important;
+  text-transform: uppercase !important;
+  text-align:center !important;
+  font-size:2.5em!important;
+  line-height:1.2em!important;
+  color: #444444 !important;
+  margin: 10px 0px 10px 0px !important;
+}
+.row .col.section-title h1 { 
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.single #single-below-header {
+  margin-bottom: 18px !important;
+  }
+h2 {
+  font-family: oswaldmedium !important;
+  text-transform: uppercase !important;
+  font-size:1.6em!important;
+  line-height:1.1em!important;
+  color: #b54512 ;
+  margin: 20px 0px 10px 0px !important;}
+h3 {
+  letter-spacing: 0.05em !important;
+  font-family: oswaldregular !important;
+  text-transform: uppercase !important;
+  font-size:1.5em!important;
+  line-height:1.2em!important;
+  margin: 20px 0px 10px 0px !important;
+}
+.chapeau p { 
+  font-family: inherit;
+  color:#000000 !important;
+  font-size: 1.4em !important;
+  line-height: 1.8em !important;
+}
+.soustitre h2 {
+  font-family: oswaldregular !important;
+  text-transform: none!important;
+  font-size:2.1em!important;
+  line-height:1.1em!important;
+  color: #3fbfeb ;
+  margin: 20px 0px 5px 0px !important;}
+}
+.citation-box {
+  background-color: #FFFFFF !important;
+  padding: 40px !important;
+  margin: 0px !important;
+}
+.citation-box p {
+  font-family: merriweatheritalic !important;
+  font-size:1.3em !important;
+  color: #3b7386;
+  background-color: #FFFFFF !important;
+  padding: 40px !important;
+  margin: 0 10% !important;
+}
+.container-wrap body{
+  padding-top: 0px;
+}
+.page-header-no-bg {
+  padding-top: 0px !important;
+  margin-top: 0px !important;
+}
+
+</style>  </main>
+<footer id="observablehq-footer">
+<nav><a rel="next" href="./aide"><span>Aide</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-11-02T18:14:05">Nov 2, 2024</a>.</div>
+</footer>
+</div>
