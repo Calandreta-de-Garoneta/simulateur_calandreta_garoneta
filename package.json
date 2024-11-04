@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@observablehq/runtime": "^5.9.9",
     "d3-dsv": "^3.0.1"
   }
 }
