@@ -26,7 +26,7 @@ const classe_verte_primaire = 180
     <h4> Année Scolaire 2024-2025 </h4>
   </div>
   <div>
-    <h2>Simulateur de Frais de Scolarité - Jours de Présence au CLAE</h2>
+    <h2>Simulateur de Frais de gestion - Jours de Présence au CLAE</h2>
     
   </div>
 </div>
@@ -97,7 +97,7 @@ const classe_verte_primaire = 180
 
 
 <div class="card">
-  <h3> Vos Frais de scolarité annuels sont estimés ainsi :  </h3>
+  <h3> Vos Frais de gestion annuels sont estimés ainsi :  </h3>
 
 
 
