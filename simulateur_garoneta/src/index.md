@@ -97,7 +97,7 @@ const classe_verte_primaire = 180
 
 
 <div class="card">
-  <h3> Vos Frais de gestion annuels sont estimés ainsi :  </h3>
+  <h3> Vos frais de gestion annuels sont estimés ainsi :  </h3>
 
 
 
