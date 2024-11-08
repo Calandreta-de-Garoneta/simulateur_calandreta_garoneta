@@ -292,7 +292,7 @@ const myChart = echarts.init(echart1);
 const option = {
   xAxis: {
     type: 'category',
-    data: ['Structure et adhésions', 'Garde', 'Repas']
+    data: ['Structure \net adhésions', 'Garde', 'Repas']
   },
   yAxis: {
     type: 'value'
