@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="generator" content="Observable Framework v1.12.0">
-<title>Simulateur frais de gestion Calandreta de Garoneta</title>
+<title>Simulateur frais annuels Calandreta de Garoneta</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.3268c726.css">
@@ -305,7 +305,7 @@ const frais_de_garde = Math.round((cout_forfait_scolarite + cout_total_clae- 20*
 return {inscrits,nb_jours_cantine,cout_cantine,nb_clae_matin,prix_clae_matin,cout_clae_matin,nb_clae_soir,prix_clae_soir,cout_clae_soir,nb_clae_midi,prix_clae_midi,cout_clae_midi,prix_clae_mercredi,cout_clae_mercredi,cout_total_clae,cout_asso_garoneta,cout_asso_cor_dor,cout_cotisation_federation_regionale_et_departementale,cout_cotisation_Conferation_trimestrielle,cout_forfait_papier,cout_classe_verte,cout_forfait_scolarite,cout_total,frais_de_scolarite,frais_de_garde};
 }});
 
-define({id: "e98ffec9", inputs: ["html","width","echarts","frais_de_scolarite","frais_de_garde","cout_cantine"], outputs: ["echart1","myChart","option"], body: (html,width,echarts,frais_de_scolarite,frais_de_garde,cout_cantine) => {
+define({id: "af1865c3", inputs: ["html","width","echarts","frais_de_scolarite","frais_de_garde","cout_cantine"], outputs: ["echart1","myChart","option"], body: (html,width,echarts,frais_de_scolarite,frais_de_garde,cout_cantine) => {
 //ici je construit mon graph echart
 const echart1 = html`<div style="width: ${width/2}px; height:400px;"></div>`
 
@@ -314,7 +314,7 @@ const myChart = echarts.init(echart1);
 const option = {
   xAxis: {
     type: 'category',
-    data: ['Scolarité', 'Garde', 'Repas']
+    data: ['Structure et adhésions', 'Garde', 'Repas']
   },
   yAxis: {
     type: 'value'
@@ -339,7 +339,7 @@ return {echart1,myChart,option};
 <nav id="observablehq-sidebar">
   <ol>
     <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
-    <li class="observablehq-link observablehq-link-active"><a href="./">Simulateur frais de gestion Calandreta de Garoneta</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./">Simulateur frais annuels Calandreta de Garoneta</a></li>
   </ol>
   <ol>
     <li class="observablehq-link"><a href="./aide">Aide</a></li>
@@ -355,7 +355,7 @@ return {echart1,myChart,option};
     <h4> Année Scolaire 2024-2025 </h4>
   </div>
   <div>
-    <h2>Simulateur de Frais de gestion - Jours de Présence au CLAE</h2>
+    <h2>Simulateur de Frais annuels - Jours de Présence au CLAE</h2>
   </div>
 </div>
 <div class="caution" ,="" label="Attention !">
@@ -471,7 +471,7 @@ return {echart1,myChart,option};
      <td>Coût</td>
     </tr>
     <tr>
-     <td>Frais de scolarité</td>
+     <td>Frais de structure et adhésions</td>
      <td><observablehq-loading></observablehq-loading><!--:a48eac1b:--> €</td>
     </tr>
     <tr>
@@ -508,7 +508,7 @@ return {echart1,myChart,option};
 <div class="observablehq observablehq--block"><!--:783ac384:--></div>
 <div class="observablehq observablehq--block"><!--:49e46965:--></div>
 <div class="observablehq observablehq--block"><!--:3cda7b6d:--></div>
-<div class="observablehq observablehq--block"><!--:e98ffec9:--></div>
+<div class="observablehq observablehq--block"><!--:af1865c3:--></div>
 <style>
 body p { 
     font-family: 'merriweatherregular' !important;
@@ -609,6 +609,6 @@ h3 {
 </style>  </main>
 <footer id="observablehq-footer">
 <nav><a rel="next" href="./aide"><span>Aide</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-11-07T12:22:10">Nov 7, 2024</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-11-08T12:11:05">Nov 8, 2024</a>.</div>
 </footer>
 </div>

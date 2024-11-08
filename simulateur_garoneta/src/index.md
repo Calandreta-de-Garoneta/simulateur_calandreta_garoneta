@@ -49,13 +49,13 @@ const classe_verte_primaire = 180
     <h3> Périodes de CLAE envisagées : </h3>
     ${clae}
     <br></br>
-    <h4>Le déjeuner comprend la CLAE ainsi que la cantine.</h4>
+    <h4>Le déjeuner comprend le CLAE ainsi que la cantine.</h4>
   </div>
 
   <div class="card">
     <h3>Barême de tarification CLAE et Cantine</h3>
 
-  Eu égard à votre nombre d'enfants et votre revenu de référence, vos [tarifs de CLAE et cantine](./aide) seront ${tranche_revenu}${lettre}.
+  Eu égard à votre nombre d'enfants et votre revenu de référence, vos [tarifs* de CLAE et cantine](./aide) seront ${tranche_revenu}${lettre}.
 
 <table>
   <tr>
@@ -79,7 +79,7 @@ const classe_verte_primaire = 180
     <td>${cout_clae_soir} €</td>
   </tr>
   <tr>
-    <td>CLSH (mercredi)</td>
+    <td>Mercredis</td>
     <td>${prix_clae_mercredi} €</td>
     <td>${cout_clae_mercredi} €</td>
   </tr>
@@ -91,13 +91,13 @@ const classe_verte_primaire = 180
   </tr>  
 </table>
 
-
+***coût pour l'inscription de 1 enfant**
 
   </div>
 
 
 <div class="card">
-  <h3> Vos frais de gestion annuels sont estimés ainsi :  </h3>
+  <h3> Vos frais annuels sont estimés ainsi :  </h3>
 
 
 
@@ -116,7 +116,7 @@ const classe_verte_primaire = 180
     <td>${cout_asso_cor_dor} €</td>
   </tr>
   <tr>
-    <td>Participation  gestion CLAE/Frais scolarité</td>
+    <td>Participation  gestion CLAE/Frais de structure</td>
     <td>${cout_forfait_scolarite} €</td>
   </tr>
   <tr>
@@ -140,15 +140,17 @@ const classe_verte_primaire = 180
     <td>${cout_cantine}</td>
   </tr>
   <tr>
-    <td>CLAE / CLSH</td>  
+    <td>CLAE / Mercredis</td>  
     <td>${cout_total_clae} €</td>
   </tr>
   <tr>
-    <td><b>Total</b></td>  
+    <td><b>Total*</b></td>  
     <td>${cout_total} €</td>
   </tr>
 
 </table>
+
+***coût total annuel pour l'inscription de tous vos enfants**
 </div>
 
 <div class="card">
