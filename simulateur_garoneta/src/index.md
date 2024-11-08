@@ -26,7 +26,7 @@ const classe_verte_primaire = 180
     <h4> Année Scolaire 2024-2025 </h4>
   </div>
   <div>
-    <h2>Simulateur de Frais de gestion - Jours de Présence au CLAE</h2>
+    <h2>Simulateur de Frais annuels - Jours de Présence au CLAE</h2>
     
   </div>
 </div>
@@ -160,7 +160,7 @@ const classe_verte_primaire = 180
      <td>Coût</td>
     </tr>
     <tr>
-     <td>Frais de scolarité</td>
+     <td>Frais de structure et adhésions</td>
      <td>${frais_de_scolarite} €</td>
     </tr>
     <tr>
@@ -290,7 +290,7 @@ const myChart = echarts.init(echart1);
 const option = {
   xAxis: {
     type: 'category',
-    data: ['Scolarité', 'Garde', 'Repas']
+    data: ['Structure et adhésions', 'Garde', 'Repas']
   },
   yAxis: {
     type: 'value'

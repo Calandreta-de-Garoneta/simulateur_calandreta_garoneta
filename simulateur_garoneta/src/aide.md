@@ -6,15 +6,15 @@ title: Aide
 
 La contribution des familles correspond à la participation financière demandée aux parents d'élèves. 
 
-## **Frais de scolarité annuel**
+## **Frais de structure et adhésions**
 
-Les frais de scolarité s'articule de la façon suivante : 
+Les frais de structure et de gestion s'articule de la façon suivante : 
 
 - Contribution Garoneta
   
   > 240 € 
 
-- Association Garonetta
+- Association Garoneta
   
   > 10 € par parent
 
@@ -38,29 +38,6 @@ Les frais de scolarité s'articule de la façon suivante :
   
   > 6 € par enfant
 
-- Association Garonetta
-  
-  > 10 € par parent
-
-- Association culturelle Cor D'oc
-  
-  > 2 € par parent
-
-- Cotisation Fédération Régionale
-  
-  > 10 € par enfant
-
-- Cotisation Fédération Départementale
-  
-  > 3 € par enfant
-
-- Cotisation Confédération
-  
-  > 56 € par enfant (14 €/trimestre)
-
-- Forfait papier
-  
-  > 6 € par enfant
 
 - Classe verte (provision)
   
