@@ -23,7 +23,7 @@ const classe_verte_primaire = 180
 <div class="grid grid-cols-2">
   <div>
     <a href="https://calandretadegaroneta.org/"><img src="/Garoneta_logo3C.png"></a> 
-    <h4> Année Scolaire 2024-2025 </h4>
+    <h4> Année Scolaire 2026-2027 </h4>
   </div>
   <div>
     <h2>Simulateur de Frais annuels - Jours de Présence au CLAE</h2>
