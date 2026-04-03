@@ -22,13 +22,9 @@ Les frais de structure et de gestion s'articule de la façon suivante :
   
   > 2 € par parent
 
-- Cotisation Fédération Régionale
+- Cotisation Fédération Régionale et Départementale
   
-  > 10 € par enfant
-
-- Cotisation Fédération Départementale
-  
-  > 3 € par enfant
+  > 50 € par enfant
 
 - Cotisation Confédération
   
