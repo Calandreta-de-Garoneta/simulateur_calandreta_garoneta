@@ -17,7 +17,7 @@ const cotisation_federation_departementale = 3
 const cotisation_Conferation_trimestrielle = 14 
 const forfait_papier = 6
 const classe_verte_maternelle = 60
-const classe_verte_primaire = 180
+const classe_verte_primaire = 200
 ```
 
 <div class="grid grid-cols-2">
