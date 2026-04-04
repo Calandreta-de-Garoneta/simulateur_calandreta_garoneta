@@ -12,7 +12,7 @@ const lmjv = ['lundi', 'mardi', 'jeudi', 'vendredi']
 const lmmjv = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
 const cout_unitaire_asso_garoneta = 10
 const cout_unitaire_cor_doc = 2
-const cotisation_federation_regionale = 47
+const cotisation_federation_regionale = 57
 const cotisation_federation_departementale = 3
 const cotisation_Conferation_trimestrielle = 14 
 const forfait_papier = 6
@@ -33,7 +33,6 @@ const classe_verte_primaire = 200
 
 <div class="caution", label="Attention !">
 
-- Le simulateur a une vocation indicative et fournit une estimation approximative des frais. **Ces estimations ne sont pas opposables, et les frais réels seront confirmés lors de l'inscription définitive**.
 - La simulation est effectuée localement dans votre navigateur, **aucune information ne quitte votre navigateur**.
 - Le simulateur ne prend pas en charge les familles ayant plus de 4 enfants inscrits. Au delà de 4 enfants, il n'y a  plus de changement tarifaire.
 - Assurez-vous que le nombre d'inscrits est bien inférieur ou égal au nombre d'enfants. Si besoin prenez contact avec l'école.

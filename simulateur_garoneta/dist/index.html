@@ -27,7 +27,7 @@ registerFile("./data/forfait_scolarite.json", {"name":"./data/forfait_scolarite.
 registerFile("./data/tarifs_actes.json", {"name":"./data/tarifs_actes.json","mimeType":"application/json","path":"./_file/data/tarifs_actes.48caa9fa.json","lastModified":1775288784828,"size":7191});
 registerFile("./data/tranche_revenu.json", {"name":"./data/tranche_revenu.json","mimeType":"application/json","path":"./_file/data/tranche_revenu.d7fb26a9.json","lastModified":1775288784828,"size":663});
 
-define({id: "a969e5c8", inputs: ["FileAttachment"], outputs: ["tranches","tarifs_actes","forfait_scolarite","semaines","lmjv","lmmjv","cout_unitaire_asso_garoneta","cout_unitaire_cor_doc","cotisation_federation_regionale","cotisation_federation_departementale","cotisation_Conferation_trimestrielle","forfait_papier","classe_verte_maternelle","classe_verte_primaire"], body: (FileAttachment) => {
+define({id: "65314ce6", inputs: ["FileAttachment"], outputs: ["tranches","tarifs_actes","forfait_scolarite","semaines","lmjv","lmmjv","cout_unitaire_asso_garoneta","cout_unitaire_cor_doc","cotisation_federation_regionale","cotisation_federation_departementale","cotisation_Conferation_trimestrielle","forfait_papier","classe_verte_maternelle","classe_verte_primaire"], body: (FileAttachment) => {
 // je charge les tranches de revenus
 const tranches = FileAttachment("./data/tranche_revenu.json").json()
 const tarifs_actes = FileAttachment("./data/tarifs_actes.json").json()
@@ -37,7 +37,7 @@ const lmjv = ['lundi', 'mardi', 'jeudi', 'vendredi']
 const lmmjv = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']
 const cout_unitaire_asso_garoneta = 10
 const cout_unitaire_cor_doc = 2
-const cotisation_federation_regionale = 47
+const cotisation_federation_regionale = 57
 const cotisation_federation_departementale = 3
 const cotisation_Conferation_trimestrielle = 14 
 const forfait_papier = 6
@@ -348,7 +348,7 @@ return {echart1,myChart,option};
 <script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
 <div id="observablehq-center">
 <main id="observablehq-main" class="observablehq">
-<div class="observablehq observablehq--block"><!--:a969e5c8:--></div>
+<div class="observablehq observablehq--block"><!--:65314ce6:--></div>
 <div class="grid grid-cols-2">
   <div>
     <a href="https://calandretadegaroneta.org/" target="_blank" rel="noopener noreferrer"><img src="./_file/Garoneta_logo3C.4cdb349a.png"></a> 
@@ -360,7 +360,6 @@ return {echart1,myChart,option};
 </div>
 <div class="caution" ,="" label="Attention !">
 <ul>
-<li>Le simulateur a une vocation indicative et fournit une estimation approximative des frais. <strong>Ces estimations ne sont pas opposables, et les frais réels seront confirmés lors de l'inscription définitive</strong>.</li>
 <li>La simulation est effectuée localement dans votre navigateur, <strong>aucune information ne quitte votre navigateur</strong>.</li>
 <li>Le simulateur ne prend pas en charge les familles ayant plus de 4 enfants inscrits. Au delà de 4 enfants, il n'y a  plus de changement tarifaire.</li>
 <li>Assurez-vous que le nombre d'inscrits est bien inférieur ou égal au nombre d'enfants. Si besoin prenez contact avec l'école.</li>
@@ -612,6 +611,6 @@ h3 {
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="next" href="./aide"><span>Aide</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2026-04-04T07:48:20">Apr 4, 2026</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2026-04-04T08:07:35">Apr 4, 2026</a>.</div>
 </footer>
 </div>

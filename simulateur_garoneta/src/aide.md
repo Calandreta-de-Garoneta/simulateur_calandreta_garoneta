@@ -24,7 +24,7 @@ Les frais de structure et de gestion s'articule de la façon suivante :
 
 - Cotisation Fédération Régionale et Départementale
   
-  > 50 € par enfant
+  > 60 € par enfant
 
 - Cotisation Confédération
   
@@ -39,7 +39,7 @@ Les frais de structure et de gestion s'articule de la façon suivante :
   
   > Maternelle: 60€
   
-  > Primaire: 180
+  > Primaire: 200
 
 
 
