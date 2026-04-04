@@ -23,11 +23,11 @@
 import {define} from "./_observablehq/client.f9c4c4d1.js";
 import {registerFile} from "./_observablehq/stdlib.3cf8fc6c.js";
 
-registerFile("./data/forfait_scolarite.json", {"name":"./data/forfait_scolarite.json","mimeType":"application/json","path":"./_file/data/forfait_scolarite.9908f4bf.json","lastModified":1775251451880,"size":3232});
-registerFile("./data/tarifs_actes.json", {"name":"./data/tarifs_actes.json","mimeType":"application/json","path":"./_file/data/tarifs_actes.48caa9fa.json","lastModified":1775251451880,"size":7191});
-registerFile("./data/tranche_revenu.json", {"name":"./data/tranche_revenu.json","mimeType":"application/json","path":"./_file/data/tranche_revenu.d7fb26a9.json","lastModified":1775251451880,"size":663});
+registerFile("./data/forfait_scolarite.json", {"name":"./data/forfait_scolarite.json","mimeType":"application/json","path":"./_file/data/forfait_scolarite.9908f4bf.json","lastModified":1775288784828,"size":3232});
+registerFile("./data/tarifs_actes.json", {"name":"./data/tarifs_actes.json","mimeType":"application/json","path":"./_file/data/tarifs_actes.48caa9fa.json","lastModified":1775288784828,"size":7191});
+registerFile("./data/tranche_revenu.json", {"name":"./data/tranche_revenu.json","mimeType":"application/json","path":"./_file/data/tranche_revenu.d7fb26a9.json","lastModified":1775288784828,"size":663});
 
-define({id: "672fc8ee", inputs: ["FileAttachment"], outputs: ["tranches","tarifs_actes","forfait_scolarite","semaines","lmjv","lmmjv","cout_unitaire_asso_garoneta","cout_unitaire_cor_doc","cotisation_federation_regionale","cotisation_federation_departementale","cotisation_Conferation_trimestrielle","forfait_papier","classe_verte_maternelle","classe_verte_primaire"], body: (FileAttachment) => {
+define({id: "a969e5c8", inputs: ["FileAttachment"], outputs: ["tranches","tarifs_actes","forfait_scolarite","semaines","lmjv","lmmjv","cout_unitaire_asso_garoneta","cout_unitaire_cor_doc","cotisation_federation_regionale","cotisation_federation_departementale","cotisation_Conferation_trimestrielle","forfait_papier","classe_verte_maternelle","classe_verte_primaire"], body: (FileAttachment) => {
 // je charge les tranches de revenus
 const tranches = FileAttachment("./data/tranche_revenu.json").json()
 const tarifs_actes = FileAttachment("./data/tarifs_actes.json").json()
@@ -42,7 +42,7 @@ const cotisation_federation_departementale = 3
 const cotisation_Conferation_trimestrielle = 14 
 const forfait_papier = 6
 const classe_verte_maternelle = 60
-const classe_verte_primaire = 180
+const classe_verte_primaire = 200
 return {tranches,tarifs_actes,forfait_scolarite,semaines,lmjv,lmmjv,cout_unitaire_asso_garoneta,cout_unitaire_cor_doc,cotisation_federation_regionale,cotisation_federation_departementale,cotisation_Conferation_trimestrielle,forfait_papier,classe_verte_maternelle,classe_verte_primaire};
 }});
 
@@ -348,7 +348,7 @@ return {echart1,myChart,option};
 <script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
 <div id="observablehq-center">
 <main id="observablehq-main" class="observablehq">
-<div class="observablehq observablehq--block"><!--:672fc8ee:--></div>
+<div class="observablehq observablehq--block"><!--:a969e5c8:--></div>
 <div class="grid grid-cols-2">
   <div>
     <a href="https://calandretadegaroneta.org/" target="_blank" rel="noopener noreferrer"><img src="./_file/Garoneta_logo3C.4cdb349a.png"></a> 
@@ -608,9 +608,10 @@ h3 {
   margin-top: 0px !important;
 }
 
-</style>  </main>
+</style>  
+</main>
 <footer id="observablehq-footer">
 <nav><a rel="next" href="./aide"><span>Aide</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2026-04-03T21:26:23">Apr 3, 2026</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2026-04-04T07:48:20">Apr 4, 2026</a>.</div>
 </footer>
 </div>
